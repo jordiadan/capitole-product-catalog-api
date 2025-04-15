@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class CapitoleProductCatalogApiApplication
+class Application
 
 fun main(args: Array<String>) {
-    runApplication<CapitoleProductCatalogApiApplication>(*args)
+    runApplication<Application>(*args)
 }

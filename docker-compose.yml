@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  postgres:
+    image: postgres:14.4
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: capitole
+      POSTGRES_PASSWORD: capitole
+      POSTGRES_DB: capitole
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U capitole" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
