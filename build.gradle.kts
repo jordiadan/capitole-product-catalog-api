@@ -18,14 +18,6 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    implementation("org.springframework.boot:spring-boot-starter")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-}
-
 sourceSets {
     create("integrationTest") {
         java.srcDir("src/integrationTest/java")
@@ -35,12 +27,29 @@ sourceSets {
     }
 }
 
+val integrationTestImplementation by configurations.getting
+val integrationTestRuntimeOnly by configurations.getting
+
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+    integrationTestImplementation("org.awaitility:awaitility:4.2.1")
+    integrationTestImplementation("org.testcontainers:junit-jupiter:1.20.0")
+    integrationTestImplementation("io.rest-assured:spring-mock-mvc:5.5.1")
+}
+
 configurations {
     getByName("integrationTestImplementation") {
-        extendsFrom(configurations.testImplementation.get())
+        extendsFrom(configurations.getByName("testImplementation"))
     }
     getByName("integrationTestRuntimeOnly") {
-        extendsFrom(configurations.testRuntimeOnly.get())
+        extendsFrom(configurations.getByName("testRuntimeOnly"))
     }
 }
 
