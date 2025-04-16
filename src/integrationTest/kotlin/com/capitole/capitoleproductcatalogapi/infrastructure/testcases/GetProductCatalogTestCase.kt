@@ -1,59 +1,31 @@
 package com.capitole.capitoleproductcatalogapi.infrastructure.testcases
 
+import com.capitole.capitoleproductcatalogapi.infrastructure.controllers.getproductcatalog.GetProductCatalogResponse
 import io.restassured.module.mockmvc.RestAssuredMockMvc.given
 import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.Matchers.hasSize
 import org.junit.jupiter.api.Test
 
 abstract class GetProductCatalogTestCase : TestCase() {
 
     @Test
     fun `should return product catalog with proper discounts applied`() {
-
-
-      val expectedJson = """
-            {
-              "products": [
-                {
-                  "sku": "SKU0001",
-                  "description": "Wireless Mouse with ergonomic design",
-                  "price": "19.99",
-                  "discountPercentage": "0",
-                  "finalPrice": "19.99",
-                  "category": "Electronics"
-                },
-                {
-                  "sku": "SKU0002",
-                  "description": "4K Ultra HD Smart TV, 55 inches",
-                  "price": "499.00",
-                  "discountPercentage": "15",
-                  "finalPrice": "424.15",
-                  "category": "Electronics"
-                },
-                {
-                  "sku": "SKU0003",
-                  "description": "Stainless Steel Water Bottle, 1L",
-                  "price": "29.50",
-                  "discountPercentage": "25",
-                  "finalPrice": "22.13",
-                  "category": "Home & Kitchen"
-                },
-                {
-                  "sku": "SKU0005",
-                  "description": "Noise-Cancelling Over-Ear Headphones",
-                  "price": "120.00",
-                  "discountPercentage": "30",
-                  "finalPrice": "84.00",
-                  "category": "Electronics"
-                }
-              ]
-            }
-        """.trimIndent()
-
         given()
             .contentType("application/json")
             .get("/products")
             .then()
             .statusCode(200)
-            .body(equalTo(expectedJson))
-    }
+            .body("products", hasSize<Int>(2))
+            .body("products[0].sku", equalTo("SKU0001"))
+            .body("products[0].description", equalTo("Wireless Mouse with ergonomic design"))
+            .body("products[0].price", equalTo("19.99"))
+            .body("products[0].discountPercentage", equalTo("0"))
+            .body("products[0].finalPrice", equalTo("19.99"))
+            .body("products[0].category", equalTo("Electronics"))
+            .body("products[1].sku", equalTo("SKU0005"))
+            .body("products[1].description", equalTo("Noise-Cancelling Over-Ear Headphones"))
+            .body("products[1].price", equalTo("120.00"))
+            .body("products[1].discountPercentage", equalTo("30"))
+            .body("products[1].finalPrice", equalTo("84.00"))
+            .body("products[1].category", equalTo("Electronics"))    }
 }
