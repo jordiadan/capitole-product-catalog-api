@@ -1,7 +1,11 @@
 package com.capitole.capitoleproductcatalogapi.infrastructure
 
+import com.capitole.capitoleproductcatalogapi.application.DiscountPercentageDTO
 import com.capitole.capitoleproductcatalogapi.application.GetProductCatalog
+import com.capitole.capitoleproductcatalogapi.application.PriceDTO
 import com.capitole.capitoleproductcatalogapi.application.ProductCatalogDTO
+import com.capitole.capitoleproductcatalogapi.application.toDTO
+import com.capitole.capitoleproductcatalogapi.domain.Category
 import com.capitole.capitoleproductcatalogapi.infrastructure.controllers.getproductcatalog.GetProductCatalogController
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -34,7 +38,7 @@ class GetProductCatalogControllerTest {
                   "sku": "SKU0001",
                   "description": "Wireless Mouse with ergonomic design",
                   "price": "19.99",
-                  "discountPercentage": "0",
+                  "discountPercentage": "0.00",
                   "finalPrice": "19.99",
                   "category": "Electronics"
                 },
@@ -42,7 +46,7 @@ class GetProductCatalogControllerTest {
                   "sku": "SKU0005",
                   "description": "Noise-Cancelling Over-Ear Headphones",
                   "price": "120.00",
-                  "discountPercentage": "30",
+                  "discountPercentage": "30.00",
                   "finalPrice": "84.00",
                   "category": "Electronics"
                 }
@@ -65,18 +69,18 @@ class GetProductCatalogControllerTest {
           ProductCatalogDTO.ProductDTO(
               sku = "SKU0001",
               description = "Wireless Mouse with ergonomic design",
-              price = "19.99",
-              discountPercentage = "0",
+              price = PriceDTO("19.99"),
+              discountPercentage = DiscountPercentageDTO("0.00"),
               finalPrice = "19.99",
-              category = "Electronics"
+              category = Category.ELECTRONICS.toDTO()
           ),
           ProductCatalogDTO.ProductDTO(
               sku = "SKU0005",
               description = "Noise-Cancelling Over-Ear Headphones",
-              price = "120.00",
-              discountPercentage = "30",
+              price = PriceDTO("120.00"),
+              discountPercentage = DiscountPercentageDTO("30.00"),
               finalPrice = "84.00",
-              category = "Electronics"
+              category = Category.ELECTRONICS.toDTO()
           )
       )
   )

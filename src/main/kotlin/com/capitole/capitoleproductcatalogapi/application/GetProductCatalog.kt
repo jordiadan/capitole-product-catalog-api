@@ -1,28 +1,31 @@
 package com.capitole.capitoleproductcatalogapi.application
 
-class GetProductCatalog {
+import com.capitole.capitoleproductcatalogapi.domain.DiscountService
+import com.capitole.capitoleproductcatalogapi.domain.Product
+import com.capitole.capitoleproductcatalogapi.domain.ProductRepository
+
+class GetProductCatalog(
+  private val productRepository: ProductRepository,
+  private val discountService: DiscountService
+) {
   fun execute(): ProductCatalogDTO {
-    // TODO Implement use case instead of using dummy content
-    return ProductCatalogDTO(
-        products = listOf(
-            ProductCatalogDTO.ProductDTO(
-                sku = "SKU0001",
-                description = "Wireless Mouse with ergonomic design",
-                price = "19.99",
-                discountPercentage = "0",
-                finalPrice = "19.99",
-                category = "Electronics"
-            ),
-            ProductCatalogDTO.ProductDTO(
-                sku = "SKU0005",
-                description = "Noise-Cancelling Over-Ear Headphones",
-                price = "120.00",
-                discountPercentage = "30",
-                finalPrice = "84.00",
-                category = "Electronics"
-            )
-        )
+    val products = productRepository.findAll()
+    return products.toProductCatalogDTO(discountService)
+  }
+}
+
+private fun List<Product>.toProductCatalogDTO(discountService: DiscountService): ProductCatalogDTO {
+  val productDTOs = this.map { product ->
+    val discount = discountService.getApplicableDiscount(product)
+    val finalPrice = product.calculatePriceAfterDiscount(discount)
+    ProductCatalogDTO.ProductDTO(
+        sku = product.sku.value,
+        description = product.description.value,
+        price = product.price.toDTO(),
+        discountPercentage = discount.toDTO(),
+        finalPrice = finalPrice,
+        category = product.category.toDTO()
     )
   }
-
+  return ProductCatalogDTO(productDTOs)
 }
