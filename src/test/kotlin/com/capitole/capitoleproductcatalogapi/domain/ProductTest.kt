@@ -27,4 +27,14 @@ class ProductTest {
 
         assertEquals("16.99", result)
     }
+
+    @Test
+    fun `calculatePriceAfterDiscount applies 30 percent discount correctly`() {
+        val originalPrice = Price(120.00)
+        val product = Product(sampleSku, sampleDescription, originalPrice, sampleCategory)
+
+        val result = product.calculatePriceAfterDiscount(DiscountPercentage(30.0))
+
+        assertEquals("84.00", result)
+    }
 }
