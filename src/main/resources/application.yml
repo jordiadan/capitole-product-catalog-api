@@ -6,3 +6,5 @@ spring:
     username: capitole
     password: capitole
     driver-class-name: "org.postgresql.Driver"
+  flyway:
+    enabled: true

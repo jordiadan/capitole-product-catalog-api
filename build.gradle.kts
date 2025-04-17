@@ -39,8 +39,11 @@ dependencies {
   // Database
   implementation("org.postgresql:postgresql:42.7.4")
 
-  implementation("org.jetbrains.kotlin:kotlin-reflect")
+  // Flyway
+  implementation("org.flywaydb:flyway-core:11.0.0")
+  implementation("org.flywaydb:flyway-database-postgresql:11.0.0")
 
+  implementation("org.jetbrains.kotlin:kotlin-reflect")
 
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")

@@ -6,6 +6,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 
 class PostgresSQLProductRepository(private val jdbcTemplate: NamedParameterJdbcTemplate) : ProductRepository {
   override fun findAll(): List<Product> {
-    TODO("Not yet implemented")
+    return listOf()
   }
 }
