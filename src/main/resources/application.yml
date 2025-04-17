@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: escape-room-backend
+  datasource:
+    url: "jdbc:postgresql://${database.host}:${database.port}/capitole"
+    username: capitole
+    password: capitole
+    driver-class-name: "org.postgresql.Driver"
