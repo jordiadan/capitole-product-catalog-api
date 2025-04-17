@@ -1,3 +1,3 @@
 package com.capitole.capitoleproductcatalogapi.domain
 
-class Description(value: String)
+class Description(val value: String)
