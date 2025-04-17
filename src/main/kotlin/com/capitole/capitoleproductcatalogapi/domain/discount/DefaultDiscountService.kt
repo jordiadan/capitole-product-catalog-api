@@ -1,4 +1,4 @@
-package com.capitole.capitoleproductcatalogapi.infrastructure.services
+package com.capitole.capitoleproductcatalogapi.domain.discount
 
 import com.capitole.capitoleproductcatalogapi.domain.Category
 import com.capitole.capitoleproductcatalogapi.domain.DiscountPercentage
