@@ -25,7 +25,6 @@ class GetProductCatalogTest {
 
   @Test
   fun `execute returns expected product catalog`() {
-    val result = getProductCatalog.execute()
 
     val products = listOf(
         Product(
@@ -43,6 +42,8 @@ class GetProductCatalogTest {
     )
 
     `when`(productRepository.findAll()).thenReturn(products)
+
+    val result = getProductCatalog.execute()
 
     val expected = ProductCatalogDTO(
         products = listOf(
