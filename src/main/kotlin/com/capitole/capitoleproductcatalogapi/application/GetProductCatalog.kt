@@ -21,7 +21,7 @@ private fun List<Product>.toPRoductCatalogDTO(discountService: DiscountService):
     ProductCatalogDTO.ProductDTO(
         sku = product.sku.value,
         description = product.description.value,
-        price = product.price.value.toString(),
+        price = product.price.toDTO(),
         discountPercentage = discount.toDTO(),
         finalPrice = finalPrice,
         category = product.category.toDTO()

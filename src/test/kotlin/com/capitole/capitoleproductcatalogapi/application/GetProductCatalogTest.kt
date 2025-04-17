@@ -56,7 +56,7 @@ class GetProductCatalogTest {
             ProductCatalogDTO.ProductDTO(
                 sku = "SKU0001",
                 description = "Wireless Mouse with ergonomic design",
-                price = "19.99",
+                price = PriceDTO("19.99"),
                 discountPercentage = DiscountPercentageDTO("0.00"),
                 finalPrice = "19.99",
                 category = Category.ELECTRONICS.toDTO()
@@ -64,7 +64,7 @@ class GetProductCatalogTest {
             ProductCatalogDTO.ProductDTO(
                 sku = "SKU0005",
                 description = "Noise-Cancelling Over-Ear Headphones",
-                price = "120.00",
+                price = PriceDTO("120.00"),
                 discountPercentage =  DiscountPercentageDTO("30.00"),
                 finalPrice = "84.00",
                 category = Category.ELECTRONICS.toDTO()

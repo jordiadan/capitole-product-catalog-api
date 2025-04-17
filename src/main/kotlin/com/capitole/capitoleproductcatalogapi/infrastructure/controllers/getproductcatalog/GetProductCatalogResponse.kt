@@ -20,7 +20,7 @@ fun ProductCatalogDTO.toGetProductCatalogResponse(): GetProductCatalogResponse =
       GetProductCatalogResponse.ProductResponse(
           sku = productDTO.sku,
           description = productDTO.description,
-          price = productDTO.price,
+          price = productDTO.price.value,
           discountPercentage = productDTO.discountPercentage.value,
           finalPrice = productDTO.finalPrice,
           category = productDTO.category.displayName
