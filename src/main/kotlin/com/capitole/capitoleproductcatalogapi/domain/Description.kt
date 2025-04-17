@@ -1,5 +1,3 @@
 package com.capitole.capitoleproductcatalogapi.domain
 
-class Description(value: String) {
-
-}
+class Description(value: String)
