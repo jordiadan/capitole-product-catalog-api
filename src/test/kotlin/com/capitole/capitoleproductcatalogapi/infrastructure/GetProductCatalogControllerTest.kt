@@ -1,7 +1,10 @@
 package com.capitole.capitoleproductcatalogapi.infrastructure
 
+import com.capitole.capitoleproductcatalogapi.application.CategoryDTO
 import com.capitole.capitoleproductcatalogapi.application.GetProductCatalog
 import com.capitole.capitoleproductcatalogapi.application.ProductCatalogDTO
+import com.capitole.capitoleproductcatalogapi.application.toDTO
+import com.capitole.capitoleproductcatalogapi.domain.Category
 import com.capitole.capitoleproductcatalogapi.infrastructure.controllers.getproductcatalog.GetProductCatalogController
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -68,7 +71,7 @@ class GetProductCatalogControllerTest {
               price = "19.99",
               discountPercentage = "0",
               finalPrice = "19.99",
-              category = "Electronics"
+              category = Category.ELECTRONICS.toDTO()
           ),
           ProductCatalogDTO.ProductDTO(
               sku = "SKU0005",
@@ -76,7 +79,7 @@ class GetProductCatalogControllerTest {
               price = "120.00",
               discountPercentage = "30",
               finalPrice = "84.00",
-              category = "Electronics"
+              category = Category.ELECTRONICS.toDTO()
           )
       )
   )

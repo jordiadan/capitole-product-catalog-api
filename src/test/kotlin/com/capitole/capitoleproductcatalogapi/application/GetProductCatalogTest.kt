@@ -53,7 +53,7 @@ class GetProductCatalogTest {
                 price = "19.99",
                 discountPercentage = "0",
                 finalPrice = "19.99",
-                category = "Electronics"
+                category = Category.ELECTRONICS.toDTO()
             ),
             ProductCatalogDTO.ProductDTO(
                 sku = "SKU0005",
@@ -61,7 +61,7 @@ class GetProductCatalogTest {
                 price = "120.00",
                 discountPercentage = "30",
                 finalPrice = "84.00",
-                category = "Electronics"
+                category = Category.ELECTRONICS.toDTO()
             )
         )
     )

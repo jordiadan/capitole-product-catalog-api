@@ -21,7 +21,7 @@ private fun List<Product>.toPRoductCatalogDTO(): ProductCatalogDTO {
         price = product.price.value.toString(),
         discountPercentage = discount,
         finalPrice = finalPrice,
-        category = product.category.name
+        category = product.category.toDTO()
     )
   }
   return ProductCatalogDTO(productDTOs)
