@@ -1,5 +1,6 @@
 package com.capitole.capitoleproductcatalogapi.application
 
+import com.capitole.capitoleproductcatalogapi.domain.DiscountPercentage
 import com.capitole.capitoleproductcatalogapi.domain.Product
 import com.capitole.capitoleproductcatalogapi.domain.ProductRepository
 
@@ -13,7 +14,7 @@ class GetProductCatalog(private val productRepository: ProductRepository) {
 
 private fun List<Product>.toPRoductCatalogDTO(): ProductCatalogDTO {
   val productDTOs = this.map { product ->
-    val discount = 0
+    val discount = DiscountPercentage(0.0)
     val finalPrice = product.calculatePriceAfterDiscount(discount)
     ProductCatalogDTO.ProductDTO(
         sku = product.sku.value,

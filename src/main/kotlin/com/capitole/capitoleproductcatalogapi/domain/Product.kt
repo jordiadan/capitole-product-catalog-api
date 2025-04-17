@@ -7,6 +7,8 @@ data class Product(
   val category: Category
 ) {
   fun calculatePriceAfterDiscount(discountPercent: DiscountPercentage): String {
-    TODO("Not yet implemented")
+    val amountToDiscount = discountPercent.value.times(price.value).div(100.00)
+    val finalPrice = price.value.minus(amountToDiscount)
+    return String.format("%.2f", finalPrice)
   }
 }
