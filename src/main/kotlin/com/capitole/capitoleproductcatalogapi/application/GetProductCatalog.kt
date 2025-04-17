@@ -10,11 +10,11 @@ class GetProductCatalog(
 ) {
   fun execute(): ProductCatalogDTO {
     val products = productRepository.findAll()
-    return products.toPRoductCatalogDTO(discountService)
+    return products.toProductCatalogDTO(discountService)
   }
 }
 
-private fun List<Product>.toPRoductCatalogDTO(discountService: DiscountService): ProductCatalogDTO {
+private fun List<Product>.toProductCatalogDTO(discountService: DiscountService): ProductCatalogDTO {
   val productDTOs = this.map { product ->
     val discount = discountService.getApplicableDiscount(product)
     val finalPrice = product.calculatePriceAfterDiscount(discount)
