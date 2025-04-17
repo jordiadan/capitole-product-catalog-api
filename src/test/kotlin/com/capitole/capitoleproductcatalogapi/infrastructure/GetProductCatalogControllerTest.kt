@@ -1,6 +1,6 @@
 package com.capitole.capitoleproductcatalogapi.infrastructure
 
-import com.capitole.capitoleproductcatalogapi.application.CategoryDTO
+import com.capitole.capitoleproductcatalogapi.application.DiscountPercentageDTO
 import com.capitole.capitoleproductcatalogapi.application.GetProductCatalog
 import com.capitole.capitoleproductcatalogapi.application.ProductCatalogDTO
 import com.capitole.capitoleproductcatalogapi.application.toDTO
@@ -69,7 +69,7 @@ class GetProductCatalogControllerTest {
               sku = "SKU0001",
               description = "Wireless Mouse with ergonomic design",
               price = "19.99",
-              discountPercentage = "0",
+              discountPercentage = DiscountPercentageDTO("0.00"),
               finalPrice = "19.99",
               category = Category.ELECTRONICS.toDTO()
           ),
@@ -77,7 +77,7 @@ class GetProductCatalogControllerTest {
               sku = "SKU0005",
               description = "Noise-Cancelling Over-Ear Headphones",
               price = "120.00",
-              discountPercentage = "30",
+              discountPercentage = DiscountPercentageDTO("30.00"),
               finalPrice = "84.00",
               category = Category.ELECTRONICS.toDTO()
           )

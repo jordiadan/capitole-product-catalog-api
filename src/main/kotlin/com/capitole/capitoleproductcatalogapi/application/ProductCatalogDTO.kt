@@ -5,7 +5,7 @@ data class ProductCatalogDTO(val products: List<ProductDTO>) {
     val sku: String,
     val description: String,
     val price: String,
-    val discountPercentage: String,
+    val discountPercentage: DiscountPercentageDTO,
     val finalPrice: String,
     val category: CategoryDTO
   )

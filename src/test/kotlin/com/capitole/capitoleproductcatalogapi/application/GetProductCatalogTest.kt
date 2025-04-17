@@ -2,6 +2,8 @@ package com.capitole.capitoleproductcatalogapi.application
 
 import com.capitole.capitoleproductcatalogapi.domain.Category
 import com.capitole.capitoleproductcatalogapi.domain.Description
+import com.capitole.capitoleproductcatalogapi.domain.DiscountPercentage
+import com.capitole.capitoleproductcatalogapi.domain.DiscountService
 import com.capitole.capitoleproductcatalogapi.domain.Price
 import com.capitole.capitoleproductcatalogapi.domain.Product
 import com.capitole.capitoleproductcatalogapi.domain.ProductRepository
@@ -16,11 +18,13 @@ class GetProductCatalogTest {
 
   private lateinit var getProductCatalog: GetProductCatalog
   private lateinit var productRepository: ProductRepository
+  private lateinit var discountService: DiscountService
 
   @BeforeEach
   fun setup() {
     productRepository = mock()
-    getProductCatalog = GetProductCatalog(productRepository)
+    discountService = mock()
+    getProductCatalog = GetProductCatalog(productRepository, discountService)
   }
 
   @Test
@@ -42,6 +46,8 @@ class GetProductCatalogTest {
     )
 
     `when`(productRepository.findAll()).thenReturn(products)
+    `when`(discountService.getApplicableDiscount(products[0])).thenReturn(DiscountPercentage(0.0))
+    `when`(discountService.getApplicableDiscount(products[1])).thenReturn(DiscountPercentage(30.0))
 
     val result = getProductCatalog.execute()
 
@@ -51,7 +57,7 @@ class GetProductCatalogTest {
                 sku = "SKU0001",
                 description = "Wireless Mouse with ergonomic design",
                 price = "19.99",
-                discountPercentage = "0",
+                discountPercentage = DiscountPercentageDTO("0.00"),
                 finalPrice = "19.99",
                 category = Category.ELECTRONICS.toDTO()
             ),
@@ -59,7 +65,7 @@ class GetProductCatalogTest {
                 sku = "SKU0005",
                 description = "Noise-Cancelling Over-Ear Headphones",
                 price = "120.00",
-                discountPercentage = "30",
+                discountPercentage =  DiscountPercentageDTO("30.00"),
                 finalPrice = "84.00",
                 category = Category.ELECTRONICS.toDTO()
             )
