@@ -1,6 +1,5 @@
 package com.capitole.capitoleproductcatalogapi.infrastructure.testcases
 
-import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.restassured.module.mockmvc.RestAssuredMockMvc.given
 import org.junit.jupiter.api.Assertions.assertEquals
