@@ -37,6 +37,7 @@ class PostgresSQLProductRepository(private val jdbcTemplate: NamedParameterJdbcT
 
     sortField?.let { field ->
       val column = when (field) {
+        SortField.SKU -> "sku"
         SortField.PRICE -> "price"
       }
       sqlBuilder.append("\nORDER BY $column ${sortOrder.name}")

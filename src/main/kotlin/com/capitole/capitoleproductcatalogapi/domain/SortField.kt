@@ -1,3 +1,3 @@
 package com.capitole.capitoleproductcatalogapi.domain
 
-enum class SortField { PRICE }
+enum class SortField { SKU, PRICE }
