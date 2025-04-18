@@ -110,4 +110,17 @@ abstract class GetProductCatalogTestCase : TestCase() {
         .body("products[1].price", equalTo("8.99"))
         .body("products[-1].price", equalTo("499.00"))
   }
+
+  @Test
+  fun `should return products sorted by price descending`() {
+    given()
+        .contentType("application/json")
+        .get("/products?sortField=PRICE&sortOrder=DESC")
+        .then()
+        .statusCode(200)
+        .body("products", hasSize<Any>(30))
+        .body("products[0].price", equalTo("499.00"))
+        .body("products[1].price", equalTo("300.00"))
+        .body("products[-1].price", equalTo("7.50"))
+  }
 }
