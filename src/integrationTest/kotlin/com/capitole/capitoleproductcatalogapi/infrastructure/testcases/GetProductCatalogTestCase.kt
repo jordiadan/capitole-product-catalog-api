@@ -99,7 +99,7 @@ abstract class GetProductCatalogTestCase : TestCase() {
   }
 
   @Test
-  fun `should return products sorted by price ascending`() {
+  fun `should return products sorted by PRICE ascending`() {
     given()
         .contentType("application/json")
         .get("/products?sortField=PRICE&sortOrder=ASC")
@@ -112,7 +112,7 @@ abstract class GetProductCatalogTestCase : TestCase() {
   }
 
   @Test
-  fun `should return products sorted by price descending`() {
+  fun `should return products sorted by PRICE descending`() {
     given()
         .contentType("application/json")
         .get("/products?sortField=PRICE&sortOrder=DESC")
@@ -147,6 +147,30 @@ abstract class GetProductCatalogTestCase : TestCase() {
         .body("products[0].sku", equalTo("SKU0030"))
         .body("products[1].sku", equalTo("SKU0029"))
         .body("products[-1].sku", equalTo("SKU0001"))
+  }
+
+  @Test
+  fun `should return products sorted by DESCRIPTION ascending`() {
+    given()
+        .contentType("application/json")
+        .get("/products?sortField=DESCRIPTION&sortOrder=ASC")
+        .then()
+        .statusCode(200)
+        .body("products", hasSize<Any>(30))
+        .body("products[0].description", equalTo("4K Ultra HD Smart TV, 55 inches"))
+        .body("products[-1].description", equalTo("Yoga Mat with Non-Slip Surface"))
+  }
+
+  @Test
+  fun `should return products sorted by DESCRIPTION descending`() {
+    given()
+        .contentType("application/json")
+        .get("/products?sortField=DESCRIPTION&sortOrder=DESC")
+        .then()
+        .statusCode(200)
+        .body("products", hasSize<Any>(30))
+        .body("products[0].description", equalTo("Yoga Mat with Non-Slip Surface"))
+        .body("products[-1].description", equalTo("4K Ultra HD Smart TV, 55 inches"))
   }
 
 }
