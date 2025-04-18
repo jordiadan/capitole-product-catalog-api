@@ -8,11 +8,14 @@ import com.capitole.capitoleproductcatalogapi.domain.Price
 import com.capitole.capitoleproductcatalogapi.domain.Product
 import com.capitole.capitoleproductcatalogapi.domain.ProductRepository
 import com.capitole.capitoleproductcatalogapi.domain.SKU
-import org.junit.jupiter.api.Assertions.*
+import com.capitole.capitoleproductcatalogapi.domain.SortField
+import com.capitole.capitoleproductcatalogapi.domain.SortOrder
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
+
 
 class GetProductCatalogTest {
 
@@ -45,11 +48,11 @@ class GetProductCatalogTest {
         )
     )
 
-    `when`(productRepository.findAll()).thenReturn(products)
+    `when`(productRepository.findAll(sortField = SortField.PRICE, sortOrder = SortOrder.ASC)).thenReturn(products)
     `when`(discountService.getApplicableDiscount(products[0])).thenReturn(DiscountPercentage(0.0))
     `when`(discountService.getApplicableDiscount(products[1])).thenReturn(DiscountPercentage(30.0))
 
-    val result = getProductCatalog.execute()
+    val result = getProductCatalog.execute(sortField = SortField.PRICE, sortOrder = SortOrder.ASC)
 
     val expected = ProductCatalogDTO(
         products = listOf(
