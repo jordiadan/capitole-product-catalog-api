@@ -6,6 +6,8 @@ import com.capitole.capitoleproductcatalogapi.application.PriceDTO
 import com.capitole.capitoleproductcatalogapi.application.ProductCatalogDTO
 import com.capitole.capitoleproductcatalogapi.application.toDTO
 import com.capitole.capitoleproductcatalogapi.domain.Category
+import com.capitole.capitoleproductcatalogapi.domain.SortField
+import com.capitole.capitoleproductcatalogapi.domain.SortOrder
 import com.capitole.capitoleproductcatalogapi.infrastructure.controllers.getproductcatalog.GetProductCatalogController
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -13,10 +15,10 @@ import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
 class GetProductCatalogControllerTest {
 
@@ -53,10 +55,12 @@ class GetProductCatalogControllerTest {
               ]
             }
         """.trimIndent()
-    `when`(getProductCatalog.execute()).thenReturn(buildExpectedProductCatalogDTO())
+    `when`(getProductCatalog.execute(sortField = SortField.PRICE, sortOrder = SortOrder.ASC)).thenReturn(
+        buildExpectedProductCatalogDTO()
+    )
 
     mockMvc.perform(
-        get("/products")
+        get("/products?sortField=PRICE")
             .contentType(MediaType.APPLICATION_JSON)
     )
         .andExpect(status().isOk)
