@@ -67,6 +67,7 @@ abstract class GetProductCatalogTestCase : TestCase() {
     assertEquals(expectedTree, actualTree)
   }
 
+  // TODO: I should add a parameterized test to verify that can filter by any category
   @Test
   fun `should return only electronics items when filtering by category Electronics`() {
     val expectedJson = """
