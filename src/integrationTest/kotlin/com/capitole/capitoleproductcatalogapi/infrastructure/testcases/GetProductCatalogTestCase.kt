@@ -123,4 +123,16 @@ abstract class GetProductCatalogTestCase : TestCase() {
         .body("products[1].price", equalTo("300.00"))
         .body("products[-1].price", equalTo("7.50"))
   }
+
+  @Test
+  fun `should return products sorted by SKU ascending`() {
+    given()
+        .contentType("application/json")
+        .get("/products?sortField=SKU&sortOrder=ASC")
+        .then()
+        .statusCode(200)
+        .body("products", hasSize<Any>(30))
+        .body("products[0].sku", equalTo("SKU0001"))
+        .body("products[-1].sku", equalTo("SKU0030"))
+  }
 }
