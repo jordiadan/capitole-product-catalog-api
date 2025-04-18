@@ -2,6 +2,8 @@ package com.capitole.capitoleproductcatalogapi.infrastructure.testcases
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.restassured.module.mockmvc.RestAssuredMockMvc.given
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.Matchers.hasSize
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -94,5 +96,18 @@ abstract class GetProductCatalogTestCase : TestCase() {
     val actualTree = mapper.readTree(actualJson)
 
     assertEquals(expectedTree, actualTree)
+  }
+
+  @Test
+  fun `should return products sorted by price ascending`() {
+    given()
+        .contentType("application/json")
+        .get("/products?sortField=PRICE&sortOrder=ASC")
+        .then()
+        .statusCode(200)
+        .body("products", hasSize<Any>(30))
+        .body("products[0].price", equalTo("7.50"))
+        .body("products[1].price", equalTo("8.99"))
+        .body("products[-1].price", equalTo("499.00"))
   }
 }
