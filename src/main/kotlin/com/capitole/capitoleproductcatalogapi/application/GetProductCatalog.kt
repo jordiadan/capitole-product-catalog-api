@@ -1,5 +1,6 @@
 package com.capitole.capitoleproductcatalogapi.application
 
+import com.capitole.capitoleproductcatalogapi.domain.Category
 import com.capitole.capitoleproductcatalogapi.domain.DiscountService
 import com.capitole.capitoleproductcatalogapi.domain.Product
 import com.capitole.capitoleproductcatalogapi.domain.ProductRepository
@@ -8,7 +9,7 @@ class GetProductCatalog(
   private val productRepository: ProductRepository,
   private val discountService: DiscountService
 ) {
-  fun execute(): ProductCatalogDTO {
+  fun execute(categoryFilter: Category? = null): ProductCatalogDTO {
     val products = productRepository.findAll()
     return products.toProductCatalogDTO(discountService)
   }

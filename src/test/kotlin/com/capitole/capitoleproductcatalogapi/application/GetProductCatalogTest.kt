@@ -65,8 +65,46 @@ class GetProductCatalogTest {
                 sku = "SKU0005",
                 description = "Noise-Cancelling Over-Ear Headphones",
                 price = PriceDTO("120.00"),
-                discountPercentage =  DiscountPercentageDTO("30.00"),
+                discountPercentage = DiscountPercentageDTO("30.00"),
                 finalPrice = "84.00",
+                category = Category.ELECTRONICS.toDTO()
+            )
+        )
+    )
+
+    assertEquals(expected, result)
+  }
+
+  @Test
+  fun `execute should return product catalog filtered by Electronics category`() {
+    val mouse = Product(
+        sku = SKU("SKU0001"),
+        description = Description("Wireless Mouse with ergonomic design"),
+        price = Price(19.99),
+        category = Category.ELECTRONICS
+    )
+    val mug = Product(
+        sku = SKU("SKU0010"),
+        description = Description("Ceramic Coffee Mug, 350ml"),
+        price = Price(12.50),
+        category = Category.HOME_AND_KITCHEN
+    )
+
+    `when`(productRepository.findAll()).thenReturn(listOf(mouse, mug))
+    `when`(discountService.getApplicableDiscount(mouse)).thenReturn(DiscountPercentage(15.0))
+    `when`(discountService.getApplicableDiscount(mug)).thenReturn(DiscountPercentage(25.0))
+
+    val categoryFilter = Category.ELECTRONICS
+    val result = getProductCatalog.execute(categoryFilter)
+
+    val expected = ProductCatalogDTO(
+        products = listOf(
+            ProductCatalogDTO.ProductDTO(
+                sku = "SKU0001",
+                description = "Wireless Mouse with ergonomic design",
+                price = PriceDTO("19.99"),
+                discountPercentage = DiscountPercentageDTO("15.00"),
+                finalPrice = "16.99",
                 category = Category.ELECTRONICS.toDTO()
             )
         )
