@@ -1,8 +1,8 @@
 package com.capitole.capitoleproductcatalogapi.infrastructure.configuration
 
-import com.capitole.capitoleproductcatalogapi.application.GetProductCatalog
-import com.capitole.capitoleproductcatalogapi.domain.DiscountService
-import com.capitole.capitoleproductcatalogapi.domain.ProductRepository
+import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.GetProductCatalog
+import com.capitole.capitoleproductcatalogapi.domain.discount.DiscountService
+import com.capitole.capitoleproductcatalogapi.domain.product.ProductRepository
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 

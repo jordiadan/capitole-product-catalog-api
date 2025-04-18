@@ -1,6 +1,6 @@
-package com.capitole.capitoleproductcatalogapi.application
+package com.capitole.capitoleproductcatalogapi.application.getproductcatalog
 
-import com.capitole.capitoleproductcatalogapi.domain.DiscountPercentage
+import com.capitole.capitoleproductcatalogapi.domain.discount.DiscountPercentage
 
 
 data class DiscountPercentageDTO (val value: String) {

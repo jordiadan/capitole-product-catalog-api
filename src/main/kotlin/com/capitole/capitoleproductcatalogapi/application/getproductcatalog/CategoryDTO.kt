@@ -1,6 +1,6 @@
-package com.capitole.capitoleproductcatalogapi.application
+package com.capitole.capitoleproductcatalogapi.application.getproductcatalog
 
-import com.capitole.capitoleproductcatalogapi.domain.Category
+import com.capitole.capitoleproductcatalogapi.domain.product.Category
 
 data class CategoryDTO(
   private val code: String,

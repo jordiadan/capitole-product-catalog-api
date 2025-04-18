@@ -1,6 +1,6 @@
-package com.capitole.capitoleproductcatalogapi.application
+package com.capitole.capitoleproductcatalogapi.application.getproductcatalog
 
-import com.capitole.capitoleproductcatalogapi.domain.Price
+import com.capitole.capitoleproductcatalogapi.domain.product.Price
 
 data class PriceDTO (val value: String) {
   companion object {

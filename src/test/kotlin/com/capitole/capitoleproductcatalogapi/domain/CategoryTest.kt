@@ -1,6 +1,7 @@
 package com.capitole.capitoleproductcatalogapi.domain
 
-import org.junit.jupiter.api.Assertions.*
+import com.capitole.capitoleproductcatalogapi.domain.product.Category
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EnumSource
 

@@ -1,4 +1,4 @@
-package com.capitole.capitoleproductcatalogapi.application
+package com.capitole.capitoleproductcatalogapi.application.getproductcatalog
 
 data class ProductCatalogDTO(val products: List<ProductDTO>) {
   data class ProductDTO(

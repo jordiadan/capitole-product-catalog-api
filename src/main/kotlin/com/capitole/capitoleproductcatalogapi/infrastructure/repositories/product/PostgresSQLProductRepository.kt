@@ -1,13 +1,13 @@
-package com.capitole.capitoleproductcatalogapi.infrastructure.repositories
+package com.capitole.capitoleproductcatalogapi.infrastructure.repositories.product
 
-import com.capitole.capitoleproductcatalogapi.domain.Category
-import com.capitole.capitoleproductcatalogapi.domain.Description
-import com.capitole.capitoleproductcatalogapi.domain.Price
-import com.capitole.capitoleproductcatalogapi.domain.Product
-import com.capitole.capitoleproductcatalogapi.domain.ProductRepository
-import com.capitole.capitoleproductcatalogapi.domain.SKU
-import com.capitole.capitoleproductcatalogapi.domain.SortField
-import com.capitole.capitoleproductcatalogapi.domain.SortOrder
+import com.capitole.capitoleproductcatalogapi.domain.product.Category
+import com.capitole.capitoleproductcatalogapi.domain.product.Description
+import com.capitole.capitoleproductcatalogapi.domain.product.Price
+import com.capitole.capitoleproductcatalogapi.domain.product.Product
+import com.capitole.capitoleproductcatalogapi.domain.product.ProductRepository
+import com.capitole.capitoleproductcatalogapi.domain.product.SKU
+import com.capitole.capitoleproductcatalogapi.domain.product.SortField
+import com.capitole.capitoleproductcatalogapi.domain.product.SortOrder
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
