@@ -11,7 +11,7 @@ class InMemoryProductRepository(initialProducts: List<Product> = defaultProducts
 
   private val products = initialProducts.toMutableList()
 
-  override fun findAll(): List<Product> = products.toList()
+  override fun findAll(categoryFilter: Category?): List<Product> = products.toList()
 
   companion object {
     private fun defaultProducts(): List<Product> = listOf(

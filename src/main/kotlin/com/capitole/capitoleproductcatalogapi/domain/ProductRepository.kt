@@ -1,5 +1,5 @@
 package com.capitole.capitoleproductcatalogapi.domain
 
 interface ProductRepository {
-  fun findAll(): List<Product>
+  fun findAll(categoryFilter: Category? = null): List<Product>
 }

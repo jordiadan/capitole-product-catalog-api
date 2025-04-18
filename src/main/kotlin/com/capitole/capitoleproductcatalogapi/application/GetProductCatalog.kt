@@ -10,9 +10,8 @@ class GetProductCatalog(
   private val discountService: DiscountService
 ) {
   fun execute(categoryFilter: Category? = null): ProductCatalogDTO {
-    val products = productRepository.findAll()
-    val filtered = categoryFilter?.let { products.filter { it.category == categoryFilter } } ?: products
-    return filtered.toProductCatalogDTO(discountService)
+    val products = productRepository.findAll(categoryFilter)
+    return products.toProductCatalogDTO(discountService)
   }
 }
 
