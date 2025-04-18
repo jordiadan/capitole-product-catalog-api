@@ -85,7 +85,7 @@ abstract class GetProductCatalogTestCase : TestCase() {
 
     val actualJson = given()
         .contentType("application/json")
-        .get("/products?category=Electronics")
+        .get("/products?category=ELECTRONICS")
         .then()
         .statusCode(200)
         .extract()
