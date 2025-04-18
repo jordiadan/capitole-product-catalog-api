@@ -65,7 +65,7 @@ class GetProductCatalogTest {
                 sku = "SKU0005",
                 description = "Noise-Cancelling Over-Ear Headphones",
                 price = PriceDTO("120.00"),
-                discountPercentage =  DiscountPercentageDTO("30.00"),
+                discountPercentage = DiscountPercentageDTO("30.00"),
                 finalPrice = "84.00",
                 category = Category.ELECTRONICS.toDTO()
             )

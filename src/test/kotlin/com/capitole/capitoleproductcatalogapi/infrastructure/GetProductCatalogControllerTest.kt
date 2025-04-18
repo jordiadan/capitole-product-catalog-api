@@ -84,4 +84,13 @@ class GetProductCatalogControllerTest {
           )
       )
   )
+
+  @Test
+  fun `should return 400 when category is invalid`() {
+    mockMvc.perform(
+        get("/products?category=INVALID_CATEGORY")
+            .contentType(MediaType.APPLICATION_JSON)
+    )
+        .andExpect(status().isBadRequest)
+  }
 }
