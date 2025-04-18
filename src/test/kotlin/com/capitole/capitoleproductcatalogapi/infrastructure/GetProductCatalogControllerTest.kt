@@ -60,7 +60,7 @@ class GetProductCatalogControllerTest {
     )
 
     mockMvc.perform(
-        get("/products")
+        get("/products?sortField=PRICE")
             .contentType(MediaType.APPLICATION_JSON)
     )
         .andExpect(status().isOk)
