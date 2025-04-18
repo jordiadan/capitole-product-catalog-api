@@ -173,4 +173,28 @@ abstract class GetProductCatalogTestCase : TestCase() {
         .body("products[-1].description", equalTo("4K Ultra HD Smart TV, 55 inches"))
   }
 
+  @Test
+  fun `should return products sorted by CATEGORY ascending`() {
+    given()
+        .contentType("application/json")
+        .get("/products?sortField=CATEGORY&sortOrder=ASC")
+        .then()
+        .statusCode(200)
+        .body("products", hasSize<Any>(30))
+        .body("products[0].category", equalTo("Accessories"))
+        .body("products[-1].category", equalTo("Toys & Games"))
+  }
+
+  @Test
+  fun `should return products sorted by CATEGORY descending`() {
+    given()
+        .contentType("application/json")
+        .get("/products?sortField=CATEGORY&sortOrder=DESC")
+        .then()
+        .statusCode(200)
+        .body("products", hasSize<Any>(30))
+        .body("products[0].category", equalTo("Toys & Games"))
+        .body("products[-1].category", equalTo("Accessories"))
+  }
+
 }
