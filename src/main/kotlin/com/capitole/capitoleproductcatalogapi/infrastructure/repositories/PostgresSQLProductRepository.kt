@@ -12,49 +12,30 @@ import org.springframework.jdbc.core.RowMapper
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 
-class PostgresSQLProductRepository(private val jdbcTemplate: NamedParameterJdbcTemplate) : ProductRepository {
+class PostgresSQLProductRepository(
+  private val jdbcTemplate: NamedParameterJdbcTemplate,
+  private val sqlBuilder: ProductSQLBuilder
+) : ProductRepository {
+
   override fun findAll(
     categoryFilter: Category?,
     sortField: SortField?,
     sortOrder: SortOrder
   ): List<Product> {
-    val sqlBuilder = StringBuilder(
-        """
-            SELECT sku,
-                   description,
-                   price,
-                   category
-              FROM products
-            """.trimIndent()
-    )
-
     val params = MapSqlParameterSource()
-
-    categoryFilter?.let {
-      sqlBuilder.append("\nWHERE category = CAST(:category AS category_enum)")
-      params.addValue("category", it.name)
-    }
-
-    sortField?.let { field ->
-      val column = when (field) {
-        SortField.SKU -> "sku"
-        SortField.PRICE -> "price"
-        SortField.DESCRIPTION -> "description"
-        SortField.CATEGORY -> "category"
-      }
-      sqlBuilder.append("\nORDER BY $column ${sortOrder.name}")
-    }
-
-    val sql = sqlBuilder.toString()
+    val sql = sqlBuilder.buildFindAllQuery(categoryFilter, sortField, sortOrder, params)
     return jdbcTemplate.query(sql, params, productRowMapper)
   }
 
-  private val productRowMapper = RowMapper<Product> { rs, _ ->
-    Product(
-        sku = SKU(rs.getString("sku")),
-        description = Description(rs.getString("description")),
-        price = Price(rs.getDouble("price")),
-        category = Category.valueOf(rs.getString("category"))
-    )
+  companion object {
+    private val productRowMapper = RowMapper<Product> { rs, _ ->
+      Product(
+          sku = SKU(rs.getString("sku")),
+          description = Description(rs.getString("description")),
+          price = Price(rs.getDouble("price")),
+          category = Category.valueOf(rs.getString("category"))
+      )
+    }
   }
 }
+
