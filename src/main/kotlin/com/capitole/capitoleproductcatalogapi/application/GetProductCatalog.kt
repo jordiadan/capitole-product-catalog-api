@@ -11,7 +11,8 @@ class GetProductCatalog(
 ) {
   fun execute(categoryFilter: Category? = null): ProductCatalogDTO {
     val products = productRepository.findAll()
-    return products.toProductCatalogDTO(discountService)
+    val filtered = categoryFilter?.let { products.filter { it.category == categoryFilter } } ?: products
+    return filtered.toProductCatalogDTO(discountService)
   }
 }
 
