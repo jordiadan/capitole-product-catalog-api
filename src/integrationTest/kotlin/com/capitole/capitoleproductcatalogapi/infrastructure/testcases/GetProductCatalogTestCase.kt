@@ -135,4 +135,18 @@ abstract class GetProductCatalogTestCase : TestCase() {
         .body("products[0].sku", equalTo("SKU0001"))
         .body("products[-1].sku", equalTo("SKU0030"))
   }
+
+  @Test
+  fun `should return products sorted by SKU descending`() {
+    given()
+        .contentType("application/json")
+        .get("/products?sortField=SKU&sortOrder=DESC")
+        .then()
+        .statusCode(200)
+        .body("products", hasSize<Any>(30))
+        .body("products[0].sku", equalTo("SKU0030"))
+        .body("products[1].sku", equalTo("SKU0029"))
+        .body("products[-1].sku", equalTo("SKU0001"))
+  }
+
 }
