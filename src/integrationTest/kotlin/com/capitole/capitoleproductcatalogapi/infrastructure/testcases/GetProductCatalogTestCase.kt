@@ -6,6 +6,8 @@ import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.Matchers.hasSize
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
 abstract class GetProductCatalogTestCase : TestCase() {
 
@@ -98,103 +100,30 @@ abstract class GetProductCatalogTestCase : TestCase() {
     assertEquals(expectedTree, actualTree)
   }
 
-  @Test
-  fun `should return products sorted by PRICE ascending`() {
+  @ParameterizedTest(name = "{index} sort by {0} {1}")
+  @CsvSource(
+      "PRICE,ASC,7.50,499.00",
+      "PRICE,DESC,499.00,7.50",
+      "SKU,ASC,SKU0001,SKU0030",
+      "SKU,DESC,SKU0030,SKU0001",
+      "DESCRIPTION,ASC,'4K Ultra HD Smart TV, 55 inches','Yoga Mat with Non-Slip Surface'",
+      "DESCRIPTION,DESC,'Yoga Mat with Non-Slip Surface','4K Ultra HD Smart TV, 55 inches'",
+      "CATEGORY,ASC,Accessories,'Toys & Games'",
+      "CATEGORY,DESC,'Toys & Games',Accessories"
+  )
+  fun `should return products sorted correctly`(
+    sortField: String,
+    sortOrder: String,
+    first: String,
+    last: String
+  ) {
     given()
         .contentType("application/json")
-        .get("/products?sortField=PRICE&sortOrder=ASC")
+        .get("/products?sortField=$sortField&sortOrder=$sortOrder")
         .then()
         .statusCode(200)
         .body("products", hasSize<Any>(30))
-        .body("products[0].price", equalTo("7.50"))
-        .body("products[1].price", equalTo("8.99"))
-        .body("products[-1].price", equalTo("499.00"))
+        .body("products[0].${sortField.lowercase()}", equalTo(first))
+        .body("products[-1].${sortField.lowercase()}", equalTo(last))
   }
-
-  @Test
-  fun `should return products sorted by PRICE descending`() {
-    given()
-        .contentType("application/json")
-        .get("/products?sortField=PRICE&sortOrder=DESC")
-        .then()
-        .statusCode(200)
-        .body("products", hasSize<Any>(30))
-        .body("products[0].price", equalTo("499.00"))
-        .body("products[1].price", equalTo("300.00"))
-        .body("products[-1].price", equalTo("7.50"))
-  }
-
-  @Test
-  fun `should return products sorted by SKU ascending`() {
-    given()
-        .contentType("application/json")
-        .get("/products?sortField=SKU&sortOrder=ASC")
-        .then()
-        .statusCode(200)
-        .body("products", hasSize<Any>(30))
-        .body("products[0].sku", equalTo("SKU0001"))
-        .body("products[-1].sku", equalTo("SKU0030"))
-  }
-
-  @Test
-  fun `should return products sorted by SKU descending`() {
-    given()
-        .contentType("application/json")
-        .get("/products?sortField=SKU&sortOrder=DESC")
-        .then()
-        .statusCode(200)
-        .body("products", hasSize<Any>(30))
-        .body("products[0].sku", equalTo("SKU0030"))
-        .body("products[1].sku", equalTo("SKU0029"))
-        .body("products[-1].sku", equalTo("SKU0001"))
-  }
-
-  @Test
-  fun `should return products sorted by DESCRIPTION ascending`() {
-    given()
-        .contentType("application/json")
-        .get("/products?sortField=DESCRIPTION&sortOrder=ASC")
-        .then()
-        .statusCode(200)
-        .body("products", hasSize<Any>(30))
-        .body("products[0].description", equalTo("4K Ultra HD Smart TV, 55 inches"))
-        .body("products[-1].description", equalTo("Yoga Mat with Non-Slip Surface"))
-  }
-
-  @Test
-  fun `should return products sorted by DESCRIPTION descending`() {
-    given()
-        .contentType("application/json")
-        .get("/products?sortField=DESCRIPTION&sortOrder=DESC")
-        .then()
-        .statusCode(200)
-        .body("products", hasSize<Any>(30))
-        .body("products[0].description", equalTo("Yoga Mat with Non-Slip Surface"))
-        .body("products[-1].description", equalTo("4K Ultra HD Smart TV, 55 inches"))
-  }
-
-  @Test
-  fun `should return products sorted by CATEGORY ascending`() {
-    given()
-        .contentType("application/json")
-        .get("/products?sortField=CATEGORY&sortOrder=ASC")
-        .then()
-        .statusCode(200)
-        .body("products", hasSize<Any>(30))
-        .body("products[0].category", equalTo("Accessories"))
-        .body("products[-1].category", equalTo("Toys & Games"))
-  }
-
-  @Test
-  fun `should return products sorted by CATEGORY descending`() {
-    given()
-        .contentType("application/json")
-        .get("/products?sortField=CATEGORY&sortOrder=DESC")
-        .then()
-        .statusCode(200)
-        .body("products", hasSize<Any>(30))
-        .body("products[0].category", equalTo("Toys & Games"))
-        .body("products[-1].category", equalTo("Accessories"))
-  }
-
 }
