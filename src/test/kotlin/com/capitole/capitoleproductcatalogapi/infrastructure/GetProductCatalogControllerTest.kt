@@ -1,13 +1,13 @@
 package com.capitole.capitoleproductcatalogapi.infrastructure
 
-import com.capitole.capitoleproductcatalogapi.application.DiscountPercentageDTO
-import com.capitole.capitoleproductcatalogapi.application.GetProductCatalog
-import com.capitole.capitoleproductcatalogapi.application.PriceDTO
-import com.capitole.capitoleproductcatalogapi.application.ProductCatalogDTO
-import com.capitole.capitoleproductcatalogapi.application.toDTO
-import com.capitole.capitoleproductcatalogapi.domain.Category
-import com.capitole.capitoleproductcatalogapi.domain.SortField
-import com.capitole.capitoleproductcatalogapi.domain.SortOrder
+import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.DiscountPercentageDTO
+import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.GetProductCatalog
+import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.PriceDTO
+import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.ProductCatalogDTO
+import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.toDTO
+import com.capitole.capitoleproductcatalogapi.domain.product.Category
+import com.capitole.capitoleproductcatalogapi.domain.product.SortField
+import com.capitole.capitoleproductcatalogapi.domain.product.SortOrder
 import com.capitole.capitoleproductcatalogapi.infrastructure.controllers.getproductcatalog.GetProductCatalogController
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

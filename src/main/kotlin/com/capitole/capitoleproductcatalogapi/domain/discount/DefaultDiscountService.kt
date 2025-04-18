@@ -1,9 +1,7 @@
 package com.capitole.capitoleproductcatalogapi.domain.discount
 
-import com.capitole.capitoleproductcatalogapi.domain.Category
-import com.capitole.capitoleproductcatalogapi.domain.DiscountPercentage
-import com.capitole.capitoleproductcatalogapi.domain.DiscountService
-import com.capitole.capitoleproductcatalogapi.domain.Product
+import com.capitole.capitoleproductcatalogapi.domain.product.Category
+import com.capitole.capitoleproductcatalogapi.domain.product.Product
 
 class DefaultDiscountService : DiscountService {
   override fun getApplicableDiscount(product: Product): DiscountPercentage {

@@ -1,4 +1,4 @@
-package com.capitole.capitoleproductcatalogapi.domain
+package com.capitole.capitoleproductcatalogapi.domain.discount
 
 data class DiscountPercentage(val value: Double) {
 /*

@@ -1,11 +1,11 @@
-package com.capitole.capitoleproductcatalogapi.application
+package com.capitole.capitoleproductcatalogapi.application.getproductcatalog
 
-import com.capitole.capitoleproductcatalogapi.domain.Category
-import com.capitole.capitoleproductcatalogapi.domain.DiscountService
-import com.capitole.capitoleproductcatalogapi.domain.Product
-import com.capitole.capitoleproductcatalogapi.domain.ProductRepository
-import com.capitole.capitoleproductcatalogapi.domain.SortField
-import com.capitole.capitoleproductcatalogapi.domain.SortOrder
+import com.capitole.capitoleproductcatalogapi.domain.discount.DiscountService
+import com.capitole.capitoleproductcatalogapi.domain.product.Category
+import com.capitole.capitoleproductcatalogapi.domain.product.Product
+import com.capitole.capitoleproductcatalogapi.domain.product.ProductRepository
+import com.capitole.capitoleproductcatalogapi.domain.product.SortField
+import com.capitole.capitoleproductcatalogapi.domain.product.SortOrder
 
 class GetProductCatalog(
   private val productRepository: ProductRepository,

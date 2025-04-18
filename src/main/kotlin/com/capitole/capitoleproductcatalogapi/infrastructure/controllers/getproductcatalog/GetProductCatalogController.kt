@@ -1,9 +1,9 @@
 package com.capitole.capitoleproductcatalogapi.infrastructure.controllers.getproductcatalog
 
-import com.capitole.capitoleproductcatalogapi.application.GetProductCatalog
-import com.capitole.capitoleproductcatalogapi.domain.Category
-import com.capitole.capitoleproductcatalogapi.domain.SortField
-import com.capitole.capitoleproductcatalogapi.domain.SortOrder
+import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.GetProductCatalog
+import com.capitole.capitoleproductcatalogapi.domain.product.Category
+import com.capitole.capitoleproductcatalogapi.domain.product.SortField
+import com.capitole.capitoleproductcatalogapi.domain.product.SortOrder
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping

@@ -1,4 +1,4 @@
-package com.capitole.capitoleproductcatalogapi.domain
+package com.capitole.capitoleproductcatalogapi.domain.product
 
 enum class Category {
   ELECTRONICS,

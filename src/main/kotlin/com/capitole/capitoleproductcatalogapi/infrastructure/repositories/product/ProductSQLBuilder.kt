@@ -1,8 +1,8 @@
-package com.capitole.capitoleproductcatalogapi.infrastructure.repositories
+package com.capitole.capitoleproductcatalogapi.infrastructure.repositories.product
 
-import com.capitole.capitoleproductcatalogapi.domain.Category
-import com.capitole.capitoleproductcatalogapi.domain.SortField
-import com.capitole.capitoleproductcatalogapi.domain.SortOrder
+import com.capitole.capitoleproductcatalogapi.domain.product.Category
+import com.capitole.capitoleproductcatalogapi.domain.product.SortField
+import com.capitole.capitoleproductcatalogapi.domain.product.SortOrder
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
 
 class ProductSQLBuilder {
