@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class DefaultDiscountServiceTest {
+
   private lateinit var discountService: DefaultDiscountService
 
   @BeforeEach
@@ -25,62 +26,26 @@ class DefaultDiscountServiceTest {
   }
 
   @Test
-  fun `sku ending with 5 gets 30 percent discount`() {
-    val product = Product(
-        sku = SKU("SKU0005"),
-        description = Description("Any"),
-        price = Price(100.0),
-        category = Category.ELECTRONICS
-    )
-    val result = discountService.getApplicableDiscount(product)
-    assertEquals(DiscountPercentage(30.0), result)
+  fun `sku ending with 5 overrides category discount`() {
+    val product = Product(SKU("SKU0005"), Description("x"), Price(200.0), Category.HOME_AND_KITCHEN)
+    assertEquals(DiscountPercentage(30.0), discountService.getApplicableDiscount(product))
   }
 
   @Test
   fun `electronics category gets 15 percent discount`() {
-    val product = Product(
-        sku = SKU("SKU0001"),
-        description = Description("Any"),
-        price = Price(100.0),
-        category = Category.ELECTRONICS
-    )
-    val result = discountService.getApplicableDiscount(product)
-    assertEquals(DiscountPercentage(15.0), result)
+    val product = Product(SKU("SKU0001"), Description("x"), Price(200.0), Category.ELECTRONICS)
+    assertEquals(DiscountPercentage(15.0), discountService.getApplicableDiscount(product))
   }
 
   @Test
   fun `home and kitchen category gets 25 percent discount`() {
-    val product = Product(
-        sku = SKU("SKU0001"),
-        description = Description("Any"),
-        price = Price(100.0),
-        category = Category.HOME_AND_KITCHEN
-    )
-    val result = discountService.getApplicableDiscount(product)
-    assertEquals(DiscountPercentage(25.0), result)
+    val product = Product(SKU("SKU0002"), Description("x"), Price(200.0), Category.HOME_AND_KITCHEN)
+    assertEquals(DiscountPercentage(25.0), discountService.getApplicableDiscount(product))
   }
 
   @Test
   fun `other categories get zero discount`() {
-    val product = Product(
-        sku = SKU("SKU0001"),
-        description = Description("Any"),
-        price = Price(100.0),
-        category = Category.CLOTHING
-    )
-    val result = discountService.getApplicableDiscount(product)
-    assertEquals(DiscountPercentage(0.0), result)
-  }
-
-  @Test
-  fun `sku ending with 5 overrides category discount`() {
-    val product = Product(
-        sku = SKU("SKU0005"),
-        description = Description("Any"),
-        price = Price(100.0),
-        category = Category.HOME_AND_KITCHEN
-    )
-    val result = discountService.getApplicableDiscount(product)
-    assertEquals(DiscountPercentage(30.0), result)
+    val product = Product(SKU("SKU0003"), Description("x"), Price(200.0), Category.CLOTHING)
+    assertEquals(DiscountPercentage(0.0), discountService.getApplicableDiscount(product))
   }
 }
