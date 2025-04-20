@@ -1,6 +1,6 @@
 package com.capitole.capitoleproductcatalogapi.domain.discount
 
-import com.capitole.capitoleproductcatalogapi.domain.discount.rules.DiscountRule
+import com.capitole.capitoleproductcatalogapi.domain.discount.rules.CategoryRule
 import com.capitole.capitoleproductcatalogapi.domain.discount.rules.SkuEndsWith5Rule
 import com.capitole.capitoleproductcatalogapi.domain.product.Category
 import com.capitole.capitoleproductcatalogapi.domain.product.Description
@@ -16,8 +16,10 @@ class DefaultDiscountServiceTest {
 
   @BeforeEach
   fun setUp() {
-    val rules = listOf<DiscountRule>(
-        SkuEndsWith5Rule()
+    val rules = listOf(
+        SkuEndsWith5Rule(),
+        CategoryRule(Category.HOME_AND_KITCHEN, 25.0),
+        CategoryRule(Category.ELECTRONICS, 15.0)
     )
     discountService = DefaultDiscountService(rules)
   }
