@@ -16,6 +16,16 @@ class InfrastructureConfiguration {
     ): ProductRepository =
         PostgresSQLProductRepository(jdbcTemplate, productSQLBuilder)
 
-    @Bean
-    fun productSQLBuilder() = ProductSQLBuilder()
+  @Bean
+  fun productSQLBuilder() = ProductSQLBuilder()
+
+  @Bean
+  fun customOpenApi(): OpenAPI =
+      OpenAPI()
+          .info(
+              Info()
+                  .title("Product Catalog API")
+                  .version("1.0.0")
+                  .description("Retrieve and filter products with real‑time discount rules")
+          )
 }
