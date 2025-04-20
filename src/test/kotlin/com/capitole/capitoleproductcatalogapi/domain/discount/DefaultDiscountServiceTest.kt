@@ -1,15 +1,23 @@
 package com.capitole.capitoleproductcatalogapi.domain.discount
 
+import com.capitole.capitoleproductcatalogapi.domain.discount.rules.DiscountRule
 import com.capitole.capitoleproductcatalogapi.domain.product.Category
 import com.capitole.capitoleproductcatalogapi.domain.product.Description
 import com.capitole.capitoleproductcatalogapi.domain.product.Price
 import com.capitole.capitoleproductcatalogapi.domain.product.Product
 import com.capitole.capitoleproductcatalogapi.domain.product.SKU
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class DefaultDiscountServiceTest {
-  private val discountService = DefaultDiscountService()
+  private lateinit var discountService: DefaultDiscountService
+
+  @BeforeEach
+  fun setUp() {
+    val rules = listOf<DiscountRule>()
+    discountService = DefaultDiscountService(rules)
+  }
 
   @Test
   fun `sku ending with 5 gets 30 percent discount`() {
