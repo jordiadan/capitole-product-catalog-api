@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 class GlobalExceptionHandler {
 
   @ExceptionHandler(CategoryNotFoundException::class)
-  fun handleInvalidCategory(ex: CategoryNotFoundException): ResponseEntity<ErrorResponse> =
-      ErrorResponse(400, ex.message ?: "Category not found")
-          .let { ResponseEntity.status(HttpStatus.BAD_REQUEST).body(it) }
+  fun handleInvalidCategory(ex: CategoryNotFoundException): ResponseEntity<ErrorResponse> {
+    return ResponseEntity
+        .status(HttpStatus.BAD_REQUEST)
+        .body(ErrorResponse(400, ex.message!!))
+  }
 }
