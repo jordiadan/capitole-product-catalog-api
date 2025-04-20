@@ -127,4 +127,40 @@ abstract class GetProductCatalogTestCase : TestCase() {
         .body("products[0].${sortField.lowercase()}", equalTo(first))
         .body("products[-1].${sortField.lowercase()}", equalTo(last))
   }
+
+  @Test
+  fun `should return first page with default size`() {
+    val actual = given()
+        .contentType("application/json")
+        .get("/products")
+        .then()
+        .statusCode(200)
+        .extract()
+        .asString()
+
+    val tree = mapper.readTree(actual)
+    assertEquals(0, tree["page"].asInt())
+    assertEquals(30, tree["totalElements"].asInt())
+    assertEquals(6, tree["totalPages"].asInt())
+    assertEquals(10, tree["size"].asInt())
+    assertEquals(10, tree["content"].size())
+  }
+
+  @Test
+  fun `should return second page with custom size`() {
+    val actual = given()
+        .contentType("application/json")
+        .get("/products?page=1&size=5")
+        .then()
+        .statusCode(200)
+        .extract()
+        .asString()
+
+    val tree = mapper.readTree(actual)
+    assertEquals(1, tree["page"].asInt())
+    assertEquals(5, tree["size"].asInt())
+    assertEquals(30, tree["totalElements"].asInt())
+    assertEquals(6, tree["totalPages"].asInt())
+    assertEquals(5, tree["content"].size())
+  }
 }
