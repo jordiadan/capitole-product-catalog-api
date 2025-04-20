@@ -6,6 +6,7 @@ import com.capitole.capitoleproductcatalogapi.domain.product.SortField
 import com.capitole.capitoleproductcatalogapi.domain.product.SortOrder
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
+import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -22,7 +23,24 @@ class GetProductCatalogController(private val getProductCatalog: GetProductCatal
   )
   @GetMapping("/products", produces = [MediaType.APPLICATION_JSON_VALUE])
   fun getProductCatalog(
-    @Parameter(description = "Filter by category (e.g. ELECTRONICS)")
+    @Parameter(
+        description = "Filter by category",
+        schema = Schema(
+            type = "string",
+            allowableValues = [
+              "ELECTRONICS",
+              "HOME_AND_KITCHEN",
+              "CLOTHING",
+              "ACCESSORIES",
+              "SPORTS",
+              "STATIONERY",
+              "TOYS_AND_GAMES",
+              "MUSICAL_INSTRUMENTS",
+              "FOOTWEAR",
+              "HOME_APPLIANCES"
+            ]
+        ), required = false
+    )
     @RequestParam(name = "category", required = false) categoryParam: String?,
     @Parameter(description = "Sort field: SKU, PRICE, DESCRIPTION or CATEGORY")
     @RequestParam(required = false) sortField: SortField?,
