@@ -15,10 +15,11 @@ class GetProductCatalogController(private val getProductCatalog: GetProductCatal
 
   @GetMapping("/products", produces = [MediaType.APPLICATION_JSON_VALUE])
   fun getProductCatalog(
-    @RequestParam(required = false) category: Category?,
+    @RequestParam(name = "category", required = false) categoryParam: String?,
     @RequestParam(required = false) sortField: SortField?,
     @RequestParam(required = false, defaultValue = "ASC") sortOrder: SortOrder
   ): ResponseEntity<GetProductCatalogResponse> {
+    val category = categoryParam?.let { Category.from(it) }
     val getProductCatalogDTO = getProductCatalog.execute(category, sortField, sortOrder)
     val getProductCatalogResponse = getProductCatalogDTO.toGetProductCatalogResponse()
     return ResponseEntity.ok()
