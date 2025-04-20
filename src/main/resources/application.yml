@@ -8,3 +8,8 @@ spring:
     driver-class-name: "org.postgresql.Driver"
   flyway:
     enabled: true
+
+discount:
+  category-rules:
+    HOME_AND_KITCHEN: 25.0
+    ELECTRONICS: 15.0
