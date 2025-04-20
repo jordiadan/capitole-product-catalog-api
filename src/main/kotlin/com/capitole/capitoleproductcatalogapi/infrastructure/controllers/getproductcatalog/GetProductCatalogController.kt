@@ -7,24 +7,23 @@ import com.capitole.capitoleproductcatalogapi.domain.product.SortOrder
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class GetProductCatalogController(private val getProductCatalog: GetProductCatalog) {
+class GetProductCatalogController(
+  private val getProductCatalog: GetProductCatalog
+) : ProductCatalogApi {
 
   @GetMapping("/products", produces = [MediaType.APPLICATION_JSON_VALUE])
-  fun getProductCatalog(
-    @RequestParam(name = "category", required = false) categoryParam: String?,
-    @RequestParam(required = false) sortField: SortField?,
-    @RequestParam(required = false, defaultValue = "ASC") sortOrder: SortOrder
+  override fun getProductCatalog(
+    category: String?,
+    sortField: SortField?,
+    sortOrder: SortOrder
   ): ResponseEntity<GetProductCatalogResponse> {
-    val category = categoryParam?.let { Category.from(it) }
-    val getProductCatalogDTO = getProductCatalog.execute(category, sortField, sortOrder)
-    val getProductCatalogResponse = getProductCatalogDTO.toGetProductCatalogResponse()
+    val catEnum = category?.let { Category.from(it) }
+    val dto = getProductCatalog.execute(catEnum, sortField, sortOrder)
     return ResponseEntity.ok()
         .contentType(MediaType.APPLICATION_JSON)
-        .body(getProductCatalogResponse)
+        .body(dto.toGetProductCatalogResponse())
   }
 }
-

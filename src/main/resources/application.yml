@@ -7,7 +7,7 @@ spring:
     password: capitole
     driver-class-name: "org.postgresql.Driver"
   flyway:
-    enabled: true
+    enabled: false
 
 discount:
   category-rules:
