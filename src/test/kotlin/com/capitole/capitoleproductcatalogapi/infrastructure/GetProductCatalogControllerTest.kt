@@ -8,6 +8,7 @@ import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.toDT
 import com.capitole.capitoleproductcatalogapi.domain.product.Category
 import com.capitole.capitoleproductcatalogapi.domain.product.SortField
 import com.capitole.capitoleproductcatalogapi.domain.product.SortOrder
+import com.capitole.capitoleproductcatalogapi.infrastructure.advice.GlobalExceptionHandler
 import com.capitole.capitoleproductcatalogapi.infrastructure.controllers.getproductcatalog.GetProductCatalogController
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -28,7 +29,10 @@ class GetProductCatalogControllerTest {
   @BeforeEach
   fun setUp() {
     getProductCatalog = mock()
-    mockMvc = MockMvcBuilders.standaloneSetup(GetProductCatalogController(getProductCatalog)).build()
+    mockMvc = MockMvcBuilders
+        .standaloneSetup(GetProductCatalogController(getProductCatalog))
+        .setControllerAdvice(GlobalExceptionHandler())
+        .build()
   }
 
   @Test
@@ -91,10 +95,18 @@ class GetProductCatalogControllerTest {
 
   @Test
   fun `should return 400 when category is invalid`() {
+    val expectedErrorJson = """
+    {
+      "message": "Category INVALID_CATEGORY not found"
+    }  
+    """.trimIndent()
+
     mockMvc.perform(
         get("/products?category=INVALID_CATEGORY")
             .contentType(MediaType.APPLICATION_JSON)
     )
         .andExpect(status().isBadRequest)
+        .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+        .andExpect(content().json(expectedErrorJson))
   }
 }
