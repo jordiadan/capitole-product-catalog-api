@@ -87,3 +87,7 @@ tasks.register<Test>("integrationTest") {
 tasks.check {
   dependsOn(tasks.named("integrationTest"))
 }
+
+tasks.named<Copy>("processIntegrationTestResources") {
+  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
