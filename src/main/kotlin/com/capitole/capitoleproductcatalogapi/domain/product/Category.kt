@@ -10,5 +10,11 @@ enum class Category {
   TOYS_AND_GAMES,
   MUSICAL_INSTRUMENTS,
   FOOTWEAR,
-  HOME_APPLIANCES
+  HOME_APPLIANCES;
+
+  companion object {
+    fun from(value: String): Category {
+      return runCatching { valueOf(value) }.getOrElse { throw CategoryNotFoundException(value) }
+    }
+  }
 }
