@@ -4,11 +4,11 @@ data class PageRequest(
   val page: Int,
   val size: Int
 ) {
-  init {
-    // TODO: Throw custom domain exceptions
-    require(page >= 0) { "page index must be non‐negative, was $page" }
-    require(size > 0) { "page size must be positive, was $size" }
-  }
+  /*
+   TODO: Thorw custom exceptions when:
+    1. Page is negative
+    2. Size is negative
+   */
 
   companion object {
     private const val DEFAULT_PAGE = 0
