@@ -1,0 +1,88 @@
+{
+  "products": [
+    {
+      "sku": "SKU0001",
+      "description": "Wireless Mouse with ergonomic design",
+      "price": "19.99",
+      "discountPercentage": "15.00",
+      "finalPrice": "16.99",
+      "category": "Electronics"
+    },
+    {
+      "sku": "SKU0002",
+      "description": "4K Ultra HD Smart TV, 55 inches",
+      "price": "499.00",
+      "discountPercentage": "15.00",
+      "finalPrice": "424.15",
+      "category": "Electronics"
+    },
+    {
+      "sku": "SKU0005",
+      "description": "Noise-Cancelling Over-Ear Headphones",
+      "price": "120.00",
+      "discountPercentage": "30.00",
+      "finalPrice": "84.00",
+      "category": "Electronics"
+    },
+    {
+      "sku": "SKU0006",
+      "description": "USB-C to USB Adapter",
+      "price": "9.99",
+      "discountPercentage": "15.00",
+      "finalPrice": "8.49",
+      "category": "Electronics"
+    },
+    {
+      "sku": "SKU0009",
+      "description": "Smartwatch with Heart Rate Monitor",
+      "price": "220.00",
+      "discountPercentage": "15.00",
+      "finalPrice": "187.00",
+      "category": "Electronics"
+    },
+    {
+      "sku": "SKU0011",
+      "description": "Bluetooth Portable Speaker",
+      "price": "60.00",
+      "discountPercentage": "15.00",
+      "finalPrice": "51.00",
+      "category": "Electronics"
+    },
+    {
+      "sku": "SKU0018",
+      "description": "DSLR Camera with 18-55mm Lens",
+      "price": "300.00",
+      "discountPercentage": "15.00",
+      "finalPrice": "255.00",
+      "category": "Electronics"
+    },
+    {
+      "sku": "SKU0022",
+      "description": "Wireless Charger Pad for Smartphones",
+      "price": "19.00",
+      "discountPercentage": "15.00",
+      "finalPrice": "16.15",
+      "category": "Electronics"
+    },
+    {
+      "sku": "SKU0025",
+      "description": "Home Security Camera with Night Vision",
+      "price": "99.00",
+      "discountPercentage": "30.00",
+      "finalPrice": "69.30",
+      "category": "Electronics"
+    },
+    {
+      "sku": "SKU0029",
+      "description": "Mechanical Gaming Keyboard with RGB Lighting",
+      "price": "110.00",
+      "discountPercentage": "15.00",
+      "finalPrice": "93.50",
+      "category": "Electronics"
+    }
+  ],
+  "page": 0,
+  "size": 20,
+  "totalElements": 10,
+  "totalPages": 1
+}
