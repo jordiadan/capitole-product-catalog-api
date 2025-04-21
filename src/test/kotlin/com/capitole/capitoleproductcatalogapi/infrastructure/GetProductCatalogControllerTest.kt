@@ -98,7 +98,11 @@ class GetProductCatalogControllerTest {
               finalPrice = "84.00",
               category = Category.ELECTRONICS.toDTO()
           )
-      )
+      ),
+      page = 0,
+      size = 2,
+      totalElements = 2,
+      totalPages = 1
   )
 
   @Test

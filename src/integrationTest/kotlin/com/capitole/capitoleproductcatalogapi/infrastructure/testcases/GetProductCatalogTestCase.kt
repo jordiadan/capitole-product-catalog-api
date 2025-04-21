@@ -141,9 +141,9 @@ abstract class GetProductCatalogTestCase : TestCase() {
     val tree = mapper.readTree(actual)
     assertEquals(0, tree["page"].asInt())
     assertEquals(30, tree["totalElements"].asInt())
-    assertEquals(6, tree["totalPages"].asInt())
-    assertEquals(10, tree["size"].asInt())
-    assertEquals(10, tree["content"].size())
+    assertEquals(2, tree["totalPages"].asInt())
+    assertEquals(20, tree["size"].asInt())
+    assertEquals(20, tree["products"].size())
   }
 
   @Test
@@ -161,6 +161,6 @@ abstract class GetProductCatalogTestCase : TestCase() {
     assertEquals(5, tree["size"].asInt())
     assertEquals(30, tree["totalElements"].asInt())
     assertEquals(6, tree["totalPages"].asInt())
-    assertEquals(5, tree["content"].size())
+    assertEquals(5, tree["products"].size())
   }
 }
