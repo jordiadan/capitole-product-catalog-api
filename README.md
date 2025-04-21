@@ -146,7 +146,7 @@ This service follows a **Hexagonal** (Ports & Adapters) architecture combined wi
 
 Loose coupling, dependency inversion, and single responsibility are applied throughout.
 
-![Alt text](docs/products-context-ddd.svg)
+![Alt text](docs/products-context-ddd.png)
 
 ---
 
