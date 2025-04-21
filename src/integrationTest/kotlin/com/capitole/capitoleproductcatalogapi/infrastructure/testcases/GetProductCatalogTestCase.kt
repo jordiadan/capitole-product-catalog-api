@@ -55,7 +55,7 @@ abstract class GetProductCatalogTestCase : TestCase() {
 
     val actualJson = given()
         .contentType("application/json")
-        .get("/products")
+        .get("/products?page=0&size=30")
         .then()
         .statusCode(200)
         .extract()
@@ -120,7 +120,7 @@ abstract class GetProductCatalogTestCase : TestCase() {
   ) {
     given()
         .contentType("application/json")
-        .get("/products?sortField=$sortField&sortOrder=$sortOrder")
+        .get("/products?sortField=$sortField&sortOrder=$sortOrder&size=30")
         .then()
         .statusCode(200)
         .body("products", hasSize<Any>(30))
