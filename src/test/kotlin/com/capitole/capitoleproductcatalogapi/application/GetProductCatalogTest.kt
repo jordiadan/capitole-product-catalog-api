@@ -1,10 +1,10 @@
 package com.capitole.capitoleproductcatalogapi.application
 
-import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.DiscountPercentageDTO
-import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.GetProductCatalog
 import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.PriceDTO
-import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.ProductCatalogDTO
-import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.toDTO
+import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.dto.DiscountPercentageDTO
+import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.dto.GetProductCatalog
+import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.dto.ProductCatalogDTO
+import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.dto.toDTO
 import com.capitole.capitoleproductcatalogapi.domain.discount.DiscountPercentage
 import com.capitole.capitoleproductcatalogapi.domain.discount.DiscountService
 import com.capitole.capitoleproductcatalogapi.domain.pagination.Page

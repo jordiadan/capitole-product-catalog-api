@@ -1,5 +1,6 @@
-package com.capitole.capitoleproductcatalogapi.application.getproductcatalog
+package com.capitole.capitoleproductcatalogapi.application.getproductcatalog.dto
 
+import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.toDTO
 import com.capitole.capitoleproductcatalogapi.domain.discount.DiscountService
 import com.capitole.capitoleproductcatalogapi.domain.pagination.Page
 import com.capitole.capitoleproductcatalogapi.domain.pagination.PageRequest

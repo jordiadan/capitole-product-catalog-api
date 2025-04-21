@@ -1,6 +1,6 @@
 package com.capitole.capitoleproductcatalogapi.infrastructure.controllers.getproductcatalog
 
-import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.GetProductCatalog
+import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.dto.GetProductCatalog
 import com.capitole.capitoleproductcatalogapi.domain.pagination.PageRequest
 import com.capitole.capitoleproductcatalogapi.domain.product.Category
 import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortField

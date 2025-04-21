@@ -1,6 +1,6 @@
 package com.capitole.capitoleproductcatalogapi.infrastructure.controllers.getproductcatalog
 
-import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.ProductCatalogDTO
+import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.dto.ProductCatalogDTO
 
 data class GetProductCatalogResponse(
   val products: List<ProductResponse>,

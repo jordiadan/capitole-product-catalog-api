@@ -1,4 +1,6 @@
-package com.capitole.capitoleproductcatalogapi.application.getproductcatalog
+package com.capitole.capitoleproductcatalogapi.application.getproductcatalog.dto
+
+import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.PriceDTO
 
 data class ProductCatalogDTO(
   val products: List<ProductDTO>,
