@@ -1,5 +1,6 @@
 package com.capitole.capitoleproductcatalogapi.infrastructure.repositories.product
 
+import com.capitole.capitoleproductcatalogapi.domain.pagination.PageRequest
 import com.capitole.capitoleproductcatalogapi.domain.product.*
 import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortSpec
 import org.springframework.jdbc.core.RowMapper
@@ -13,7 +14,8 @@ class PostgresSQLProductRepository(
 
   override fun findAll(
       categoryFilter: Category?,
-      sort: SortSpec?
+      sort: SortSpec?,
+      pageRequest: PageRequest
   ): List<Product> {
     val params = MapSqlParameterSource()
       val sql = sqlBuilder.buildFindAllQuery(categoryFilter, sort, params)

@@ -1,6 +1,7 @@
 package com.capitole.capitoleproductcatalogapi.application.getproductcatalog
 
 import com.capitole.capitoleproductcatalogapi.domain.discount.DiscountService
+import com.capitole.capitoleproductcatalogapi.domain.pagination.PageRequest
 import com.capitole.capitoleproductcatalogapi.domain.product.Category
 import com.capitole.capitoleproductcatalogapi.domain.product.Product
 import com.capitole.capitoleproductcatalogapi.domain.product.ProductRepository
@@ -16,9 +17,10 @@ class GetProductCatalog(
         categoryFilter: Category? = null,
         sortField: SortField?,
         sortOrder: SortOrder,
+        pageRequest: PageRequest
     ): ProductCatalogDTO {
         val sortSpec = SortSpec.of(sortField, sortOrder)
-        val products = productRepository.findAll(categoryFilter, sortSpec)
+        val products = productRepository.findAll(categoryFilter, sortSpec, pageRequest)
         return products.toProductCatalogDTO(discountService)
     }
 }

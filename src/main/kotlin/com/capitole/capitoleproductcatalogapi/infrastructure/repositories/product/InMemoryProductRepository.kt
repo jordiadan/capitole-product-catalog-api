@@ -1,5 +1,6 @@
 package com.capitole.capitoleproductcatalogapi.infrastructure.repositories.product
 
+import com.capitole.capitoleproductcatalogapi.domain.pagination.PageRequest
 import com.capitole.capitoleproductcatalogapi.domain.product.Category
 import com.capitole.capitoleproductcatalogapi.domain.product.Description
 import com.capitole.capitoleproductcatalogapi.domain.product.Price
@@ -87,7 +88,8 @@ class InMemoryProductRepository : ProductRepository {
 
   override fun findAll(
     categoryFilter: Category?,
-    sort: SortSpec?
+    sort: SortSpec?,
+    pageRequest: PageRequest
   ): List<Product> {
     var result = data
 
