@@ -49,7 +49,11 @@ abstract class GetProductCatalogTestCase : TestCase() {
         {"sku":"SKU0028","description":"Kids' Educational Tablet Toy","price":"22.00","discountPercentage":"0.00","finalPrice":"22.00","category":"Toys & Games"},
         {"sku":"SKU0029","description":"Mechanical Gaming Keyboard with RGB Lighting","price":"110.00","discountPercentage":"15.00","finalPrice":"93.50","category":"Electronics"},
         {"sku":"SKU0030","description":"Pack of 10 Ballpoint Pens, Blue Ink","price":"7.50","discountPercentage":"0.00","finalPrice":"7.50","category":"Stationery"}
-      ]
+      ],
+      "page":0,
+      "size":30,
+      "totalElements":30,
+      "totalPages":1
     }
     """.trimIndent()
 
@@ -83,7 +87,11 @@ abstract class GetProductCatalogTestCase : TestCase() {
         {"sku":"SKU0022","description":"Wireless Charger Pad for Smartphones","price":"19.00","discountPercentage":"15.00","finalPrice":"16.15","category":"Electronics"},
         {"sku":"SKU0025","description":"Home Security Camera with Night Vision","price":"99.00","discountPercentage":"30.00","finalPrice":"69.30","category":"Electronics"},
         {"sku":"SKU0029","description":"Mechanical Gaming Keyboard with RGB Lighting","price":"110.00","discountPercentage":"15.00","finalPrice":"93.50","category":"Electronics"}
-      ]
+      ],
+      "page":0,
+      "size":20,
+      "totalElements":10,
+      "totalPages":1
     }
     """.trimIndent()
 
