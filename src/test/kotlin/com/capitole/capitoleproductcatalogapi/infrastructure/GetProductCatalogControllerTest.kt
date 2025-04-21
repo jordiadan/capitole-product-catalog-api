@@ -5,6 +5,7 @@ import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.GetP
 import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.PriceDTO
 import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.ProductCatalogDTO
 import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.toDTO
+import com.capitole.capitoleproductcatalogapi.domain.pagination.PageRequest
 import com.capitole.capitoleproductcatalogapi.domain.product.Category
 import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortField
 import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortOrder
@@ -59,7 +60,14 @@ class GetProductCatalogControllerTest {
               ]
             }
         """.trimIndent()
-    `when`(getProductCatalog.execute(sortField = SortField.PRICE, sortOrder = SortOrder.ASC)).thenReturn(
+
+    `when`(
+        getProductCatalog.execute(
+            sortField = SortField.PRICE,
+            sortOrder = SortOrder.ASC,
+            pageRequest = PageRequest.of(0, 20)
+        )
+    ).thenReturn(
         buildExpectedProductCatalogDTO()
     )
 

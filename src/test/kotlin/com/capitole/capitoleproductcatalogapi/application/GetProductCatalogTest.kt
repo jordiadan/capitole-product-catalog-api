@@ -7,6 +7,7 @@ import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.Prod
 import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.toDTO
 import com.capitole.capitoleproductcatalogapi.domain.discount.DiscountPercentage
 import com.capitole.capitoleproductcatalogapi.domain.discount.DiscountService
+import com.capitole.capitoleproductcatalogapi.domain.pagination.PageRequest
 import com.capitole.capitoleproductcatalogapi.domain.product.Category
 import com.capitole.capitoleproductcatalogapi.domain.product.Description
 import com.capitole.capitoleproductcatalogapi.domain.product.Price
@@ -54,11 +55,20 @@ class GetProductCatalogTest {
         )
     )
 
-    `when`(productRepository.findAll(sort = SortSpec(SortField.PRICE, SortOrder.ASC))).thenReturn(products)
+    `when`(
+        productRepository.findAll(
+            sort = SortSpec(SortField.PRICE, SortOrder.ASC),
+            pageRequest = PageRequest.of(1, 2)
+        )
+    ).thenReturn(products)
     `when`(discountService.getApplicableDiscount(products[0])).thenReturn(DiscountPercentage(0.0))
     `when`(discountService.getApplicableDiscount(products[1])).thenReturn(DiscountPercentage(30.0))
 
-    val result = getProductCatalog.execute(sortField = SortField.PRICE, sortOrder = SortOrder.ASC)
+    val result = getProductCatalog.execute(
+        sortField = SortField.PRICE,
+        sortOrder = SortOrder.ASC,
+        pageRequest = PageRequest.of(1, 2)
+    )
 
     val expected = ProductCatalogDTO(
         products = listOf(
