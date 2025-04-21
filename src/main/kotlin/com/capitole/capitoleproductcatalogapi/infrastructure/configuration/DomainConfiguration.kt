@@ -1,11 +1,11 @@
 package com.capitole.capitoleproductcatalogapi.infrastructure.configuration
 
-import com.capitole.capitoleproductcatalogapi.domain.discount.DefaultDiscountService
-import com.capitole.capitoleproductcatalogapi.domain.discount.DiscountService
-import com.capitole.capitoleproductcatalogapi.domain.discount.rules.CategoryRule
-import com.capitole.capitoleproductcatalogapi.domain.discount.rules.DiscountRule
-import com.capitole.capitoleproductcatalogapi.domain.discount.rules.SkuEndsWith5Rule
 import com.capitole.capitoleproductcatalogapi.domain.product.Category
+import com.capitole.capitoleproductcatalogapi.domain.product.discount.DefaultDiscountService
+import com.capitole.capitoleproductcatalogapi.domain.product.discount.DiscountService
+import com.capitole.capitoleproductcatalogapi.domain.product.discount.rules.CategoryRule
+import com.capitole.capitoleproductcatalogapi.domain.product.discount.rules.DiscountRule
+import com.capitole.capitoleproductcatalogapi.domain.product.discount.rules.SkuEndsWith5Rule
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

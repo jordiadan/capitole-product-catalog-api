@@ -1,7 +1,11 @@
 package com.capitole.capitoleproductcatalogapi.domain
 
-import com.capitole.capitoleproductcatalogapi.domain.discount.DiscountPercentage
-import com.capitole.capitoleproductcatalogapi.domain.product.*
+import com.capitole.capitoleproductcatalogapi.domain.product.Category
+import com.capitole.capitoleproductcatalogapi.domain.product.Description
+import com.capitole.capitoleproductcatalogapi.domain.product.Price
+import com.capitole.capitoleproductcatalogapi.domain.product.Product
+import com.capitole.capitoleproductcatalogapi.domain.product.SKU
+import com.capitole.capitoleproductcatalogapi.domain.product.discount.DiscountPercentage
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
