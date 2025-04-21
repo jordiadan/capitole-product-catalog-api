@@ -1,4 +1,4 @@
-package com.capitole.capitoleproductcatalogapi.application.getproductcatalog
+package com.capitole.capitoleproductcatalogapi.application.getproductcatalog.dto
 
 import com.capitole.capitoleproductcatalogapi.domain.discount.DiscountPercentage
 

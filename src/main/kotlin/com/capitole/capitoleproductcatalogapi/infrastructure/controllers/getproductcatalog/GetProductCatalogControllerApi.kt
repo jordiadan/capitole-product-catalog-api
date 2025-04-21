@@ -1,7 +1,7 @@
 package com.capitole.capitoleproductcatalogapi.infrastructure.controllers.getproductcatalog
 
-import com.capitole.capitoleproductcatalogapi.domain.product.SortField
-import com.capitole.capitoleproductcatalogapi.domain.product.SortOrder
+import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortField
+import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortOrder
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.media.Schema
@@ -9,12 +9,12 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RequestParam
 
-@Tag(name = "Products", description = "Retrieve, filter & sort product catalog")
+@Tag(name = "Products", description = "Retrieve, filter, sort & paginate product catalog")
 interface ProductCatalogApi {
 
   @Operation(
       summary = "List products",
-      description = "Returns all products, with optional filtering by category and sorting"
+      description = "Returns a page of products, with optional filtering by category, sorting and pagination"
   )
   fun getProductCatalog(
     @Parameter(
@@ -30,15 +30,24 @@ interface ProductCatalogApi {
         ),
         required = false
     )
-    @RequestParam("category", required = false)
+    @RequestParam(name = "category", required = false)
     category: String?,
 
     @Parameter(description = "Sort field: SKU, PRICE, DESCRIPTION or CATEGORY")
-    @RequestParam("sortField", required = false)
+    @RequestParam(name = "sortField", required = false)
     sortField: SortField?,
 
     @Parameter(description = "Sort order: ASC or DESC")
-    @RequestParam("sortOrder", required = false, defaultValue = "ASC")
-    sortOrder: SortOrder
+    @RequestParam(name = "sortOrder", required = false, defaultValue = "ASC")
+    sortOrder: SortOrder,
+
+    @Parameter(description = "Page index (0-based)", example = "0")
+    @RequestParam(name = "page", required = false, defaultValue = "0")
+    page: Int,
+
+    @Parameter(description = "Page size", example = "20")
+    @RequestParam(name = "size", required = false, defaultValue = "20")
+    size: Int
+
   ): ResponseEntity<GetProductCatalogResponse>
 }
