@@ -1,5 +1,6 @@
 package com.capitole.capitoleproductcatalogapi.infrastructure.testcases
 
+import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.restassured.module.mockmvc.RestAssuredMockMvc.given
 import org.hamcrest.CoreMatchers.equalTo
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import java.nio.charset.StandardCharsets
 
 abstract class GetProductCatalogTestCase : TestCase() {
 
@@ -15,8 +17,6 @@ abstract class GetProductCatalogTestCase : TestCase() {
 
   @Test
   fun `should return product catalog with proper discounts applied for all products`() {
-    val expectedJson = loadJson("all_products_page0_size30.json")
-
     val actualJson = given()
         .contentType("application/json")
         .get("/products?page=0&size=30")
@@ -25,7 +25,7 @@ abstract class GetProductCatalogTestCase : TestCase() {
         .extract()
         .asString()
 
-    val expectedTree = mapper.readTree(expectedJson)
+    val expectedTree = loadFixture("all_products_page0_size30.json")
     val actualTree = mapper.readTree(actualJson)
 
     assertEquals(expectedTree, actualTree)
@@ -34,8 +34,6 @@ abstract class GetProductCatalogTestCase : TestCase() {
   // TODO: I should add a parameterized test to verify that can filter by any category
   @Test
   fun `should return only electronics items when filtering by category Electronics`() {
-    val expectedJson = loadJson("electronics_default_page.json")
-
     val actualJson = given()
         .contentType("application/json")
         .get("/products?category=ELECTRONICS")
@@ -44,7 +42,7 @@ abstract class GetProductCatalogTestCase : TestCase() {
         .extract()
         .asString()
 
-    val expectedTree = mapper.readTree(expectedJson)
+    val expectedTree = loadFixture("electronics_default_page.json")
     val actualTree = mapper.readTree(actualJson)
 
     assertEquals(expectedTree, actualTree)
@@ -113,10 +111,10 @@ abstract class GetProductCatalogTestCase : TestCase() {
     assertEquals(5, tree["products"].size())
   }
 
-  private fun loadJson(name: String): String =
+  private fun loadFixture(path: String): JsonNode =
       javaClass.classLoader
-          .getResourceAsStream("responses/$name")
-          ?.bufferedReader(Charsets.UTF_8)
-          ?.use { it.readText().trimIndent() }
-        ?: error("Could not load resource responses/$name")
+          .getResourceAsStream("responses/$path")
+          ?.bufferedReader(StandardCharsets.UTF_8)
+          ?.use { mapper.readTree(it) }
+        ?: error("Fixture not found: responses/$path")
 }
