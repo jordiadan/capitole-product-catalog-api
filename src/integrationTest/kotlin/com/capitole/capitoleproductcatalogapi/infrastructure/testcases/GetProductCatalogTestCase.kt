@@ -1,18 +1,14 @@
 package com.capitole.capitoleproductcatalogapi.infrastructure.testcases
 
 import com.fasterxml.jackson.databind.JsonNode
-import com.fasterxml.jackson.databind.ObjectMapper
 import io.restassured.module.mockmvc.RestAssuredMockMvc.given
 import org.hamcrest.Matchers.hasSize
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
-import java.nio.charset.StandardCharsets
 
 abstract class GetProductCatalogTestCase : TestCase() {
-
-  private val mapper = ObjectMapper()
 
   @Test
   fun `should return product catalog with proper discounts applied for all products`() {
@@ -82,11 +78,4 @@ abstract class GetProductCatalogTestCase : TestCase() {
         .asString()
     return mapper.readTree(response)
   }
-
-  private fun loadFixture(name: String): JsonNode =
-      javaClass.classLoader
-          .getResourceAsStream("responses/$name")
-          ?.bufferedReader(StandardCharsets.UTF_8)
-          ?.use { mapper.readTree(it) }
-        ?: error("Fixture not found: responses/$name")
 }
