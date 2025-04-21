@@ -1,6 +1,7 @@
 package com.capitole.capitoleproductcatalogapi.application.getproductcatalog
 
 import com.capitole.capitoleproductcatalogapi.domain.discount.DiscountService
+import com.capitole.capitoleproductcatalogapi.domain.pagination.Page
 import com.capitole.capitoleproductcatalogapi.domain.pagination.PageRequest
 import com.capitole.capitoleproductcatalogapi.domain.product.Category
 import com.capitole.capitoleproductcatalogapi.domain.product.Product
@@ -25,8 +26,8 @@ class GetProductCatalog(
     }
 }
 
-private fun List<Product>.toProductCatalogDTO(discountService: DiscountService): ProductCatalogDTO {
-    val productDTOs = this.map { product ->
+private fun Page<Product>.toProductCatalogDTO(discountService: DiscountService): ProductCatalogDTO {
+    val productDTOs = this.content.map { product ->
         val discount = discountService.getApplicableDiscount(product)
         val finalPrice = product.calculatePriceAfterDiscount(discount)
         ProductCatalogDTO.ProductDTO(
