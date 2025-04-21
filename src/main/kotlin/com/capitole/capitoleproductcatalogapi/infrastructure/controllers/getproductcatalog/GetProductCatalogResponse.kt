@@ -3,7 +3,11 @@ package com.capitole.capitoleproductcatalogapi.infrastructure.controllers.getpro
 import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.ProductCatalogDTO
 
 data class GetProductCatalogResponse(
-  val products: List<ProductResponse>
+  val products: List<ProductResponse>,
+  val page: Int,
+  val size: Int,
+  val totalElements: Long,
+  val totalPages: Int
 ) {
   data class ProductResponse(
     val sku: String,
@@ -25,5 +29,9 @@ fun ProductCatalogDTO.toGetProductCatalogResponse(): GetProductCatalogResponse =
           finalPrice = productDTO.finalPrice,
           category = productDTO.category.displayName
       )
-    }
+    },
+    page = page,
+    size = size,
+    totalElements = totalElements,
+    totalPages = totalPages
 )

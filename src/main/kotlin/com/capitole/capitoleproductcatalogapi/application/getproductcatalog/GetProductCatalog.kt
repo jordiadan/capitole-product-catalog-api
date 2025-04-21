@@ -39,5 +39,11 @@ private fun Page<Product>.toProductCatalogDTO(discountService: DiscountService):
             category = product.category.toDTO()
         )
     }
-    return ProductCatalogDTO(productDTOs)
+    return ProductCatalogDTO(
+        products = productDTOs,
+        page = pageNumber,
+        size = pageSize,
+        totalElements = totalElements,
+        totalPages = totalPages
+    )
 }
