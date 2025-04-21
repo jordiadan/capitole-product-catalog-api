@@ -1,12 +1,12 @@
 package com.capitole.capitoleproductcatalogapi.application.getproductcatalog.dto
 
 import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.toDTO
-import com.capitole.capitoleproductcatalogapi.domain.discount.DiscountService
 import com.capitole.capitoleproductcatalogapi.domain.pagination.Page
 import com.capitole.capitoleproductcatalogapi.domain.pagination.PageRequest
 import com.capitole.capitoleproductcatalogapi.domain.product.Category
 import com.capitole.capitoleproductcatalogapi.domain.product.Product
 import com.capitole.capitoleproductcatalogapi.domain.product.ProductRepository
+import com.capitole.capitoleproductcatalogapi.domain.product.discount.DiscountService
 import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortField
 import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortOrder
 import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortSpec

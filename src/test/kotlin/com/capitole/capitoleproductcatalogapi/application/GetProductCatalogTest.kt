@@ -5,8 +5,6 @@ import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.dto.
 import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.dto.GetProductCatalog
 import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.dto.ProductCatalogDTO
 import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.dto.toDTO
-import com.capitole.capitoleproductcatalogapi.domain.discount.DiscountPercentage
-import com.capitole.capitoleproductcatalogapi.domain.discount.DiscountService
 import com.capitole.capitoleproductcatalogapi.domain.pagination.Page
 import com.capitole.capitoleproductcatalogapi.domain.pagination.PageRequest
 import com.capitole.capitoleproductcatalogapi.domain.product.Category
@@ -15,6 +13,8 @@ import com.capitole.capitoleproductcatalogapi.domain.product.Price
 import com.capitole.capitoleproductcatalogapi.domain.product.Product
 import com.capitole.capitoleproductcatalogapi.domain.product.ProductRepository
 import com.capitole.capitoleproductcatalogapi.domain.product.SKU
+import com.capitole.capitoleproductcatalogapi.domain.product.discount.DiscountPercentage
+import com.capitole.capitoleproductcatalogapi.domain.product.discount.DiscountService
 import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortField
 import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortOrder
 import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortSpec

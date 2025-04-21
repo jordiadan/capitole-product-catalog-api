@@ -1,12 +1,14 @@
 package com.capitole.capitoleproductcatalogapi.domain.discount
 
-import com.capitole.capitoleproductcatalogapi.domain.discount.rules.CategoryRule
-import com.capitole.capitoleproductcatalogapi.domain.discount.rules.SkuEndsWith5Rule
 import com.capitole.capitoleproductcatalogapi.domain.product.Category
 import com.capitole.capitoleproductcatalogapi.domain.product.Description
 import com.capitole.capitoleproductcatalogapi.domain.product.Price
 import com.capitole.capitoleproductcatalogapi.domain.product.Product
 import com.capitole.capitoleproductcatalogapi.domain.product.SKU
+import com.capitole.capitoleproductcatalogapi.domain.product.discount.DefaultDiscountService
+import com.capitole.capitoleproductcatalogapi.domain.product.discount.DiscountPercentage
+import com.capitole.capitoleproductcatalogapi.domain.product.discount.rules.CategoryRule
+import com.capitole.capitoleproductcatalogapi.domain.product.discount.rules.SkuEndsWith5Rule
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
