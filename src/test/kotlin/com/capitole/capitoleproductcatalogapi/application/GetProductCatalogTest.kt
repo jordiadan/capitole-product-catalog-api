@@ -13,8 +13,9 @@ import com.capitole.capitoleproductcatalogapi.domain.product.Price
 import com.capitole.capitoleproductcatalogapi.domain.product.Product
 import com.capitole.capitoleproductcatalogapi.domain.product.ProductRepository
 import com.capitole.capitoleproductcatalogapi.domain.product.SKU
-import com.capitole.capitoleproductcatalogapi.domain.product.SortField
-import com.capitole.capitoleproductcatalogapi.domain.product.SortOrder
+import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortField
+import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortOrder
+import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortSpec
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -53,7 +54,7 @@ class GetProductCatalogTest {
         )
     )
 
-    `when`(productRepository.findAll(sortField = SortField.PRICE, sortOrder = SortOrder.ASC)).thenReturn(products)
+    `when`(productRepository.findAll(sort = SortSpec(SortField.PRICE, SortOrder.ASC))).thenReturn(products)
     `when`(discountService.getApplicableDiscount(products[0])).thenReturn(DiscountPercentage(0.0))
     `when`(discountService.getApplicableDiscount(products[1])).thenReturn(DiscountPercentage(30.0))
 
