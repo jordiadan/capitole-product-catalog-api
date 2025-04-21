@@ -1,6 +1,6 @@
 package com.capitole.capitoleproductcatalogapi.domain.product
 
-import com.capitole.capitoleproductcatalogapi.domain.discount.DiscountPercentage
+import com.capitole.capitoleproductcatalogapi.domain.product.discount.DiscountPercentage
 
 data class Product(
   val sku: SKU,

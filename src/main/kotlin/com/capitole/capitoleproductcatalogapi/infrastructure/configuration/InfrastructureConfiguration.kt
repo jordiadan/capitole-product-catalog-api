@@ -16,11 +16,11 @@ class InfrastructureConfiguration {
 
   // TODO: Just to test "main" environment with dummy data (OpenApi)
   @Bean
-  @Profile("!integration‑test")
+  @Profile("!integration-test")
   fun inMemoryProductRepository() = InMemoryProductRepository()
 
   @Bean
-  @Profile("integration‑test")
+  @Profile("integration-test")
   fun productRepository(
     jdbcTemplate: NamedParameterJdbcTemplate,
     productSQLBuilder: ProductSQLBuilder

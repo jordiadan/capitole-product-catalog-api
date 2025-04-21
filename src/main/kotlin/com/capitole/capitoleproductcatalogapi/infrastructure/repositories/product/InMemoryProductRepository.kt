@@ -1,13 +1,16 @@
 package com.capitole.capitoleproductcatalogapi.infrastructure.repositories.product
 
+import com.capitole.capitoleproductcatalogapi.domain.pagination.Page
+import com.capitole.capitoleproductcatalogapi.domain.pagination.PageRequest
 import com.capitole.capitoleproductcatalogapi.domain.product.Category
 import com.capitole.capitoleproductcatalogapi.domain.product.Description
 import com.capitole.capitoleproductcatalogapi.domain.product.Price
 import com.capitole.capitoleproductcatalogapi.domain.product.Product
 import com.capitole.capitoleproductcatalogapi.domain.product.ProductRepository
 import com.capitole.capitoleproductcatalogapi.domain.product.SKU
-import com.capitole.capitoleproductcatalogapi.domain.product.SortField
-import com.capitole.capitoleproductcatalogapi.domain.product.SortOrder
+import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortField
+import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortOrder
+import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortSpec
 
 class InMemoryProductRepository : ProductRepository {
 
@@ -86,27 +89,41 @@ class InMemoryProductRepository : ProductRepository {
 
   override fun findAll(
     categoryFilter: Category?,
-    sortField: SortField?,
-    sortOrder: SortOrder
-  ): List<Product> {
-    var result = data
-
-    categoryFilter?.let {
-      result = result.filter { p -> p.category == it }
-    }
-
-    sortField?.let { field ->
-      result = when (field) {
-        SortField.SKU -> result.sortedByOrNull { it.sku.value }
-        SortField.PRICE -> result.sortedByOrNull { it.price.value }
-        SortField.DESCRIPTION -> result.sortedByOrNull { it.description.value }
-        SortField.CATEGORY -> result.sortedByOrNull { it.category.name }
-      }.let { if (sortOrder == SortOrder.DESC) it.reversed() else it }
-    }
-
-    return result
+    sortSpec: SortSpec?,
+    pageRequest: PageRequest
+  ): Page<Product> {
+    val filtered = applyFilter(data, categoryFilter)
+    val sorted = applySort(filtered, sortSpec)
+    return applyPagination(sorted, pageRequest)
   }
 
-  private fun <T : Comparable<T>> List<Product>.sortedByOrNull(selector: (Product) -> T) =
-      if (this.isEmpty()) this else this.sortedBy(selector)
+  private fun applyFilter(products: List<Product>, category: Category?): List<Product> =
+      category?.let { products.filter { it.category == category } } ?: products
+
+  private fun applySort(products: List<Product>, sortSpec: SortSpec?): List<Product> {
+    if (sortSpec == null) return products
+
+    val comparator = when (sortSpec.field) {
+      SortField.SKU -> compareBy<Product> { it.sku.value }
+      SortField.PRICE -> compareBy { it.price.value }
+      SortField.DESCRIPTION -> compareBy { it.description.value }
+      SortField.CATEGORY -> compareBy { it.category.name }
+    }
+
+    return if (sortSpec.order == SortOrder.DESC) products.sortedWith(comparator.reversed())
+    else products.sortedWith(comparator)
+  }
+
+  private fun applyPagination(products: List<Product>, pageRequest: PageRequest): Page<Product> {
+    val total = products.size.toLong()
+    val fromIndex = pageRequest.page * pageRequest.size
+    val toIndex = (fromIndex + pageRequest.size).coerceAtMost(products.size)
+    val pageContent = if (fromIndex >= products.size) emptyList() else products.subList(fromIndex, toIndex)
+    return Page(
+        content = pageContent,
+        pageNumber = pageRequest.page,
+        pageSize = pageRequest.size,
+        totalElements = total
+    )
+  }
 }

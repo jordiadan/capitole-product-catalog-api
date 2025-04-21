@@ -1,13 +1,14 @@
 package com.capitole.capitoleproductcatalogapi.infrastructure
 
-import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.DiscountPercentageDTO
-import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.GetProductCatalog
 import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.PriceDTO
-import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.ProductCatalogDTO
-import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.toDTO
+import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.dto.DiscountPercentageDTO
+import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.dto.GetProductCatalog
+import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.dto.ProductCatalogDTO
+import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.dto.toDTO
+import com.capitole.capitoleproductcatalogapi.domain.pagination.PageRequest
 import com.capitole.capitoleproductcatalogapi.domain.product.Category
-import com.capitole.capitoleproductcatalogapi.domain.product.SortField
-import com.capitole.capitoleproductcatalogapi.domain.product.SortOrder
+import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortField
+import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortOrder
 import com.capitole.capitoleproductcatalogapi.infrastructure.advice.GlobalExceptionHandler
 import com.capitole.capitoleproductcatalogapi.infrastructure.controllers.getproductcatalog.GetProductCatalogController
 import org.junit.jupiter.api.BeforeEach
@@ -59,7 +60,14 @@ class GetProductCatalogControllerTest {
               ]
             }
         """.trimIndent()
-    `when`(getProductCatalog.execute(sortField = SortField.PRICE, sortOrder = SortOrder.ASC)).thenReturn(
+
+    `when`(
+        getProductCatalog.execute(
+            sortField = SortField.PRICE,
+            sortOrder = SortOrder.ASC,
+            pageRequest = PageRequest.of(0, 20)
+        )
+    ).thenReturn(
         buildExpectedProductCatalogDTO()
     )
 
@@ -90,7 +98,11 @@ class GetProductCatalogControllerTest {
               finalPrice = "84.00",
               category = Category.ELECTRONICS.toDTO()
           )
-      )
+      ),
+      page = 0,
+      size = 2,
+      totalElements = 2,
+      totalPages = 1
   )
 
   @Test
