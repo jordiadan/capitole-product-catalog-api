@@ -1,8 +1,8 @@
 package com.capitole.capitoleproductcatalogapi.infrastructure.repositories.product
 
 import com.capitole.capitoleproductcatalogapi.domain.product.Category
-import com.capitole.capitoleproductcatalogapi.domain.product.SortField
-import com.capitole.capitoleproductcatalogapi.domain.product.SortOrder
+import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortField
+import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortSpec
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
 
 class ProductSQLBuilder {
@@ -15,10 +15,9 @@ class ProductSQLBuilder {
   )
 
   fun buildFindAllQuery(
-    category: Category?,
-    sortField: SortField?,
-    sortOrder: SortOrder,
-    params: MapSqlParameterSource
+      category: Category?,
+      sort: SortSpec?,
+      params: MapSqlParameterSource
   ): String {
     val query = StringBuilder(
         """
@@ -32,11 +31,11 @@ class ProductSQLBuilder {
       params.addValue("category", it.name)
     }
 
-    sortField?.also { field ->
-      val column = fieldToColumn[field]
-        ?: throw IllegalArgumentException("Unsupported sort field: $field")
-      query.append("\n ORDER BY $column ${sortOrder.name}")
-    }
+      sort?.field.also { field ->
+          val column = fieldToColumn[field]
+              ?: throw IllegalArgumentException("Unsupported sort field: $field")
+          query.append("\n ORDER BY $column ${sort?.order?.name}")
+      }
 
     return query.toString()
   }

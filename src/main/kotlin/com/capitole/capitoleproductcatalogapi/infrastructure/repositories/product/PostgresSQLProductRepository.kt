@@ -1,13 +1,7 @@
 package com.capitole.capitoleproductcatalogapi.infrastructure.repositories.product
 
-import com.capitole.capitoleproductcatalogapi.domain.product.Category
-import com.capitole.capitoleproductcatalogapi.domain.product.Description
-import com.capitole.capitoleproductcatalogapi.domain.product.Price
-import com.capitole.capitoleproductcatalogapi.domain.product.Product
-import com.capitole.capitoleproductcatalogapi.domain.product.ProductRepository
-import com.capitole.capitoleproductcatalogapi.domain.product.SKU
-import com.capitole.capitoleproductcatalogapi.domain.product.SortField
-import com.capitole.capitoleproductcatalogapi.domain.product.SortOrder
+import com.capitole.capitoleproductcatalogapi.domain.product.*
+import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortSpec
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
@@ -18,12 +12,11 @@ class PostgresSQLProductRepository(
 ) : ProductRepository {
 
   override fun findAll(
-    categoryFilter: Category?,
-    sortField: SortField?,
-    sortOrder: SortOrder
+      categoryFilter: Category?,
+      sort: SortSpec?
   ): List<Product> {
     val params = MapSqlParameterSource()
-    val sql = sqlBuilder.buildFindAllQuery(categoryFilter, sortField, sortOrder, params)
+      val sql = sqlBuilder.buildFindAllQuery(categoryFilter, sort, params)
     return jdbcTemplate.query(sql, params, productRowMapper)
   }
 

@@ -6,8 +6,9 @@ import com.capitole.capitoleproductcatalogapi.domain.product.Price
 import com.capitole.capitoleproductcatalogapi.domain.product.Product
 import com.capitole.capitoleproductcatalogapi.domain.product.ProductRepository
 import com.capitole.capitoleproductcatalogapi.domain.product.SKU
-import com.capitole.capitoleproductcatalogapi.domain.product.SortField
-import com.capitole.capitoleproductcatalogapi.domain.product.SortOrder
+import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortField
+import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortOrder
+import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortSpec
 
 class InMemoryProductRepository : ProductRepository {
 
@@ -86,8 +87,7 @@ class InMemoryProductRepository : ProductRepository {
 
   override fun findAll(
     categoryFilter: Category?,
-    sortField: SortField?,
-    sortOrder: SortOrder
+    sort: SortSpec?
   ): List<Product> {
     var result = data
 
@@ -95,13 +95,13 @@ class InMemoryProductRepository : ProductRepository {
       result = result.filter { p -> p.category == it }
     }
 
-    sortField?.let { field ->
+    sort?.field?.let { field ->
       result = when (field) {
         SortField.SKU -> result.sortedByOrNull { it.sku.value }
         SortField.PRICE -> result.sortedByOrNull { it.price.value }
         SortField.DESCRIPTION -> result.sortedByOrNull { it.description.value }
         SortField.CATEGORY -> result.sortedByOrNull { it.category.name }
-      }.let { if (sortOrder == SortOrder.DESC) it.reversed() else it }
+      }.let { if (sort.order == SortOrder.DESC) it.reversed() else it }
     }
 
     return result

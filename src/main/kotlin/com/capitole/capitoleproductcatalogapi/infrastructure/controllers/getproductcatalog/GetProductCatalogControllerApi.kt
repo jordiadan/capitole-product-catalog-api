@@ -1,7 +1,7 @@
 package com.capitole.capitoleproductcatalogapi.infrastructure.controllers.getproductcatalog
 
-import com.capitole.capitoleproductcatalogapi.domain.product.SortField
-import com.capitole.capitoleproductcatalogapi.domain.product.SortOrder
+import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortField
+import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortOrder
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.media.Schema

@@ -6,8 +6,8 @@ import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.Pric
 import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.ProductCatalogDTO
 import com.capitole.capitoleproductcatalogapi.application.getproductcatalog.toDTO
 import com.capitole.capitoleproductcatalogapi.domain.product.Category
-import com.capitole.capitoleproductcatalogapi.domain.product.SortField
-import com.capitole.capitoleproductcatalogapi.domain.product.SortOrder
+import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortField
+import com.capitole.capitoleproductcatalogapi.domain.product.sort.SortOrder
 import com.capitole.capitoleproductcatalogapi.infrastructure.advice.GlobalExceptionHandler
 import com.capitole.capitoleproductcatalogapi.infrastructure.controllers.getproductcatalog.GetProductCatalogController
 import org.junit.jupiter.api.BeforeEach
