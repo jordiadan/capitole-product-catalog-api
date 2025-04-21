@@ -195,5 +195,5 @@ Run all tests:
 - CI/CD pipeline & Docker image.
 - Consider moving discount definitions into a dedicated Promotion aggregate or database table for time‑bounded offers.
 
-<p align="center">Built with ❤️ by Jordi Adán.</p>
+<p align="center">Built with ❤️ by Jordi Adan.</p>
 
